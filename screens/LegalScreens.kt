@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.ynmidk.atlas.core.fadeTopEdge
 import com.ynmidk.atlas.theme.AtlasTextStyle
 import com.ynmidk.atlas.theme.LocalAtlasComponents
 
@@ -69,8 +70,9 @@ internal fun LicensesScreen(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .verticalScroll(rememberScrollState())
                     .padding(innerPadding)
+                    .fadeTopEdge()
+                    .verticalScroll(rememberScrollState())
                     .padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
@@ -111,8 +113,9 @@ private fun LegalTextScreen(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .verticalScroll(rememberScrollState())
                     .padding(innerPadding)
+                    .fadeTopEdge()
+                    .verticalScroll(rememberScrollState())
                     .padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {

@@ -119,6 +119,8 @@ interface AtlasScreens {
     fun ThemeScreen(
         options: List<ThemeOption>,
         selectedThemeId: String,
+        highContrastEnabled: Boolean,
+        onToggleHighContrast: (Boolean) -> Unit,
         onSelectTheme: (ThemeOption) -> Unit,
         onBack: (() -> Unit)? = null
     )

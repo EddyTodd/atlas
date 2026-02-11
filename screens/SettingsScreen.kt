@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import com.ynmidk.atlas.core.CardStyle
 import com.ynmidk.atlas.core.IconRole
 import com.ynmidk.atlas.core.atlasIcon
+import com.ynmidk.atlas.core.fadeTopEdge
 import com.ynmidk.atlas.theme.LocalAtlasComponents
 import com.ynmidk.atlas.theme.AtlasTextStyle
 import com.ynmidk.atlas.theme.LocalColors
@@ -45,8 +46,9 @@ internal fun SettingsScreen(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .verticalScroll(rememberScrollState())
                     .padding(innerPadding)
+                    .fadeTopEdge()
+                    .verticalScroll(rememberScrollState())
                     .padding(32.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {

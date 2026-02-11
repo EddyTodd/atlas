@@ -259,10 +259,10 @@ internal object StylizedColors {
         boardBackground = Color(0xFF0A3050),
         islands = Color(0xFF1B4A6E),
         mineBackground = Color(0xFF0D47A1),
-        primary = Color(0xFFE3F2FD),
-        accent = Color(0xFF184A73),
+        primary = Color(0xFFEAF6FF),
+        accent = Color(0xFFB3E5FC),
         onPrimary = Color(0xFF0A3050),
-        onBackground = Color(0xFFE3F2FD),
+        onBackground = Color(0xFFFFFFFF),
         errorFg = Color(0xFF0A3050)
     )
 

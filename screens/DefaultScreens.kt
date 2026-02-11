@@ -99,11 +99,15 @@ object DefaultScreens : AtlasScreens {
     override fun ThemeScreen(
         options: List<ThemeOption>,
         selectedThemeId: String,
+        highContrastEnabled: Boolean,
+        onToggleHighContrast: (Boolean) -> Unit,
         onSelectTheme: (ThemeOption) -> Unit,
         onBack: (() -> Unit)?
     ) = DefaultThemeScreen(
         options = options,
         selectedThemeId = selectedThemeId,
+        highContrastEnabled = highContrastEnabled,
+        onToggleHighContrast = onToggleHighContrast,
         onSelectTheme = onSelectTheme,
         onBack = onBack
     )

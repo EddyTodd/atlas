@@ -15,6 +15,7 @@ import com.ynmidk.atlas.game.TicTacToeGameStore
 import com.ynmidk.atlas.theme.LocalAtlasComponents
 import com.ynmidk.atlas.theme.LocalAtlasScreens
 import com.ynmidk.atlas.theme.ThemeId
+import com.ynmidk.atlas.theme.ThemeSelection
 import kotlinx.coroutines.launch
 
 private enum class GameRoute {
@@ -37,9 +38,10 @@ private enum class GameRoute {
 
 @Composable
 fun AtlasGameScreen(
-    themeId: ThemeId,
-    onThemeChange: (ThemeId) -> Unit,
-    themePreview: @Composable (themeId: ThemeId, onThemeChange: (ThemeId) -> Unit) -> Unit,
+    themeSelection: ThemeSelection,
+    systemInDarkTheme: Boolean,
+    onThemeSelectionChange: (ThemeSelection) -> Unit,
+    themePreview: @Composable (themeId: ThemeId, onPreviewTap: () -> Unit) -> Unit,
     homeDisplayTitle: String? = null
 ) {
     val c = LocalAtlasComponents.current
@@ -146,7 +148,12 @@ fun AtlasGameScreen(
                 SettingsSection(
                     label = "Preferences",
                     items = listOf(
-                        SettingsItem("theme", "🎨", "Theme", themeId.label),
+                        SettingsItem(
+                            "theme",
+                            "🎨",
+                            "Theme",
+                            themeSelection.displayLabel(systemInDarkTheme)
+                        ),
                         SettingsItem("language", "🌐", "Language", "Choose app language")
                     )
                 ),
@@ -261,9 +268,10 @@ fun AtlasGameScreen(
         )
 
         GameRoute.Theme -> ThemeScreen(
-            themeId = themeId,
+            themeSelection = themeSelection,
+            systemInDarkTheme = systemInDarkTheme,
             onBack = navigateBack,
-            onThemeChange = onThemeChange,
+            onThemeSelectionChange = onThemeSelectionChange,
             preview = themePreview
         )
     }
