@@ -1,7 +1,6 @@
 package com.ynmidk.atlas.core
 
 import com.ynmidk.atlas.screens.AtlasScreens
-import com.ynmidk.atlas.core.AtlasTypography
 import com.ynmidk.atlas.theme.Colors
 
 open class ThemeDefinition(

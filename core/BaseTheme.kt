@@ -1,7 +1,5 @@
 package com.ynmidk.atlas.core
 
-import com.ynmidk.atlas.core.AtlasComponents
-import com.ynmidk.atlas.core.ThemeDefinition
 import com.ynmidk.atlas.screens.AtlasScreens
 import com.ynmidk.atlas.screens.DefaultScreens
 import com.ynmidk.atlas.theme.Colors

@@ -1,12 +1,10 @@
 package com.ynmidk.atlas.themes.stylized.neon
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -31,7 +29,6 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.luminance
@@ -50,6 +47,7 @@ import com.ynmidk.atlas.core.atlasIcon
 import com.ynmidk.atlas.core.primaryButtonTextPadding
 import com.ynmidk.atlas.theme.AtlasTextStyle
 import com.ynmidk.atlas.theme.LocalColors
+import java.util.Locale
 
 object NeonThemeComponents : BaseAtlasComponents() {
 
@@ -94,7 +92,10 @@ object NeonThemeComponents : BaseAtlasComponents() {
                         modifier = Modifier,
                         glowColor = NeonTokens.Cyan
                     ) {
-                        Icon(imageVector = atlasIcon(IconRole.Settings), contentDescription = "Settings")
+                        Icon(
+                            imageVector = atlasIcon(IconRole.Settings),
+                            contentDescription = "Settings"
+                        )
                     }
                 }
             },
@@ -107,6 +108,11 @@ object NeonThemeComponents : BaseAtlasComponents() {
 
     @Composable
     override fun Text(text: String, style: AtlasTextStyle) {
+        val resolvedText = if (style == AtlasTextStyle.Subtitle) {
+            text.uppercase(Locale.getDefault())
+        } else {
+            text
+        }
         val glow = when (style) {
             AtlasTextStyle.DisplayTitle,
             AtlasTextStyle.Title,
@@ -139,7 +145,7 @@ object NeonThemeComponents : BaseAtlasComponents() {
             AtlasTextStyle.Overline -> ComponentTokens.OverlineSize
         }
         NeonText(
-            text = text,
+            text = resolvedText,
             glowColor = glow,
             textColor = NeonTokens.White,
             fontSize = size,
@@ -271,6 +277,7 @@ object NeonThemeComponents : BaseAtlasComponents() {
             IconButtonVariant.Primary -> NeonTokens.Magenta
             IconButtonVariant.Secondary,
             IconButtonVariant.Outlined -> NeonTokens.Cyan
+
             IconButtonVariant.Colored -> tintColor ?: NeonTokens.Cyan
         }
         NeonIconButton(

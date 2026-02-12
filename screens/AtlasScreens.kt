@@ -16,8 +16,7 @@ data class SettingsSection(
 data class SettingsItem(
     val id: String,
     val icon: String,
-    val title: String,
-    val subtitle: String
+    val title: String
 )
 
 data class AchievementItem(
@@ -50,31 +49,23 @@ data class ThemeOption(
 interface AtlasScreens {
     @Composable
     fun HomeScreen(
-        displayTitle: String? = null,
-        subtitle: String,
-        difficulties: List<HomeDifficulty>,
-        selectedDifficultyId: String,
-        onDifficultySelected: (String) -> Unit,
-        continueTitle: String?,
-        continueSubtitle: String?,
+        continueDescription: String?,
         onContinue: (() -> Unit)?,
-        onBack: (() -> Unit)? = null,
-        onOpenSettings: (() -> Unit)? = null,
+        newGameOptionsContent: (@Composable () -> Unit)? = null,
         onStartGame: () -> Unit
     )
 
     @Composable
-    fun SettingsMainScreen(
-        title: String,
-        subtitle: String,
-        sections: List<SettingsSection>,
-        onBack: (() -> Unit)? = null,
-        onSelectItem: (SettingsItem) -> Unit
+    fun GameScreen(
+        gameplayView: @Composable () -> Unit
     )
 
     @Composable
+    fun SettingsMainScreen()
+
+    @Composable
     fun AboutScreen(
-        appName: String? = null,
+        title: String? = null,
         developer: String? = null,
         design: String = "Sandstone UI",
         version: String? = null,

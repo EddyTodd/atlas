@@ -7,10 +7,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,25 +20,55 @@ import com.ynmidk.atlas.core.CardStyle
 import com.ynmidk.atlas.core.IconRole
 import com.ynmidk.atlas.core.atlasIcon
 import com.ynmidk.atlas.core.fadeTopEdge
-import com.ynmidk.atlas.theme.LocalAtlasComponents
 import com.ynmidk.atlas.theme.AtlasTextStyle
+import com.ynmidk.atlas.theme.LocalAtlasComponents
+import com.ynmidk.atlas.theme.LocalAtlasNavigation
 import com.ynmidk.atlas.theme.LocalColors
 
 @Composable
-internal fun SettingsScreen(
-    title: String,
-    sections: List<SettingsSection>,
-    onBack: (() -> Unit)?,
-    onSelectItem: (SettingsItem) -> Unit
-) {
+internal fun SettingsScreen() {
     val c = LocalAtlasComponents.current
     val colors = LocalColors.current
+    val navigation = LocalAtlasNavigation.current
+
+    val sections = listOf(
+        SettingsSection(
+            label = "Game",
+            items = listOf(
+                SettingsItem("gameplay", "🎮", "Gameplay"),
+                SettingsItem("how_to_play", "❓", "How to Play"),
+                SettingsItem("statistics", "📊", "Statistics"),
+                SettingsItem("achievements", "🏆", "Achievements")
+            )
+        ),
+        SettingsSection(
+            label = "Preferences",
+            items = listOf(
+                SettingsItem("theme", "🎨", "Theme"),
+                SettingsItem("language", "🌐", "Language")
+            )
+        ),
+        SettingsSection(
+            label = "Store",
+            items = listOf(
+                SettingsItem("remove_ads", "🚫", "Remove Ads"),
+                SettingsItem("more_games", "🕹️", "More Games")
+            )
+        ),
+        SettingsSection(
+            label = "Info",
+            items = listOf(
+                SettingsItem("about", "ℹ️", "About")
+            )
+        )
+    )
+
     Scaffold(
         containerColor = Color.Transparent,
         topBar = {
             c.TopBar(
-                title = title,
-                onLeadingIconClick = onBack
+                title = "Settings",
+                onLeadingIconClick = navigation.onNavigateBack
             )
         }
     ) { innerPadding ->
@@ -56,7 +86,19 @@ internal fun SettingsScreen(
                     section.items.forEach { item ->
                         c.Card(
                             style = CardStyle.Tappable,
-                            onClick = { onSelectItem(item) }
+                            onClick = {
+                                when (item.id) {
+                                    "gameplay" -> navigation.onOpenGameplaySettings()
+                                    "how_to_play" -> navigation.onOpenHowToPlay()
+                                    "statistics" -> navigation.onOpenStatistics()
+                                    "achievements" -> navigation.onOpenAchievements()
+                                    "theme" -> navigation.onOpenTheme()
+                                    "language" -> navigation.onOpenLanguage()
+                                    "remove_ads" -> navigation.onOpenRemoveAds()
+                                    "more_games" -> navigation.onOpenMoreGames()
+                                    "about" -> navigation.onOpenAbout()
+                                }
+                            }
                         ) {
                             Row(
                                 modifier = Modifier.fillMaxWidth(),

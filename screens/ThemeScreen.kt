@@ -26,10 +26,10 @@ import com.ynmidk.atlas.core.CardStyle
 import com.ynmidk.atlas.core.IconRole
 import com.ynmidk.atlas.core.atlasIcon
 import com.ynmidk.atlas.core.fadeTopEdge
-import com.ynmidk.atlas.theme.LocalAtlasComponents
-import com.ynmidk.atlas.theme.LocalColors
-import com.ynmidk.atlas.theme.LocalAtlasScreens
 import com.ynmidk.atlas.theme.AtlasTextStyle
+import com.ynmidk.atlas.theme.LocalAtlasComponents
+import com.ynmidk.atlas.theme.LocalAtlasScreens
+import com.ynmidk.atlas.theme.LocalColors
 import com.ynmidk.atlas.theme.ThemeId
 import com.ynmidk.atlas.theme.ThemeMode
 import com.ynmidk.atlas.theme.ThemeRegistry

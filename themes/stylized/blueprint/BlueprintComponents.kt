@@ -43,6 +43,7 @@ import com.ynmidk.atlas.core.IconRole
 import com.ynmidk.atlas.core.primaryButtonTextPadding
 import com.ynmidk.atlas.theme.AtlasTextStyle
 import com.ynmidk.atlas.theme.LocalColors
+import java.util.Locale
 
 object BlueprintThemeComponents : BaseAtlasComponents() {
 
@@ -102,14 +103,20 @@ object BlueprintThemeComponents : BaseAtlasComponents() {
 
     @Composable
     override fun Text(text: String, style: AtlasTextStyle) {
-        val colors = LocalColors.current
-        val color = if (style == AtlasTextStyle.Muted || style == AtlasTextStyle.Caption || style == AtlasTextStyle.CardSubtitle || style == AtlasTextStyle.Overline) {
-            colors.textMuted
+        val resolvedText = if (style == AtlasTextStyle.Subtitle) {
+            text.uppercase(Locale.getDefault())
         } else {
-            colors.text
+            text
         }
+        val colors = LocalColors.current
+        val color =
+            if (style == AtlasTextStyle.Muted || style == AtlasTextStyle.Caption || style == AtlasTextStyle.CardSubtitle || style == AtlasTextStyle.Overline) {
+                colors.textMuted
+            } else {
+                colors.text
+            }
         Text(
-            text = text,
+            text = resolvedText,
             style = textStyleFor(style),
             color = color
         )
@@ -242,7 +249,13 @@ object BlueprintThemeComponents : BaseAtlasComponents() {
                 border = BorderStroke(BlueprintTokens.CardBorderWidth, borderColor)
             ) {
                 Box {
-                    Box(modifier = Modifier.blueprintCardDecoration(lineColor, dashEffect, cardShape))
+                    Box(
+                        modifier = Modifier.blueprintCardDecoration(
+                            lineColor,
+                            dashEffect,
+                            cardShape
+                        )
+                    )
                     CompositionLocalProvider(
                         androidx.compose.material3.LocalContentColor provides colors.text
                     ) {
@@ -464,9 +477,14 @@ object BlueprintThemeComponents : BaseAtlasComponents() {
                 fontFamily = BlueprintFontFamily
             )
 
-            AtlasTextStyle.Subtitle,
-            AtlasTextStyle.SectionTitle -> TextStyle(
+            AtlasTextStyle.Subtitle -> TextStyle(
                 fontSize = ComponentTokens.SubtitleSize,
+                fontWeight = FontWeight.Bold,
+                fontFamily = BlueprintFontFamily
+            )
+
+            AtlasTextStyle.SectionTitle -> TextStyle(
+                fontSize = ComponentTokens.SectionTitleSize,
                 fontWeight = FontWeight.Medium,
                 fontFamily = BlueprintFontFamily
             )

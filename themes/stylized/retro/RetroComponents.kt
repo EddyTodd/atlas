@@ -44,7 +44,6 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
-import androidx.compose.ui.unit.dp
 import com.ynmidk.atlas.core.BaseAtlasComponents
 import com.ynmidk.atlas.core.BaseTokens
 import com.ynmidk.atlas.core.ButtonSize
@@ -57,6 +56,7 @@ import com.ynmidk.atlas.core.atlasIcon
 import com.ynmidk.atlas.core.primaryButtonTextPadding
 import com.ynmidk.atlas.theme.AtlasTextStyle
 import com.ynmidk.atlas.theme.LocalColors
+import java.util.Locale
 import kotlin.math.round
 import kotlin.math.roundToInt
 
@@ -110,14 +110,20 @@ object RetroThemeComponents : BaseAtlasComponents() {
 
     @Composable
     override fun Text(text: String, style: AtlasTextStyle) {
-        val colors = LocalColors.current
-        val color = if (style == AtlasTextStyle.Muted || style == AtlasTextStyle.Caption || style == AtlasTextStyle.CardSubtitle || style == AtlasTextStyle.Overline) {
-            colors.textMuted
+        val resolvedText = if (style == AtlasTextStyle.Subtitle) {
+            text.uppercase(Locale.getDefault())
         } else {
-            colors.text
+            text
         }
+        val colors = LocalColors.current
+        val color =
+            if (style == AtlasTextStyle.Muted || style == AtlasTextStyle.Caption || style == AtlasTextStyle.CardSubtitle || style == AtlasTextStyle.Overline) {
+                colors.textMuted
+            } else {
+                colors.text
+            }
         Text(
-            text = text,
+            text = resolvedText,
             style = textStyleFor(style),
             color = color
         )
@@ -350,7 +356,8 @@ object RetroThemeComponents : BaseAtlasComponents() {
                 var newValue = valueRange.start + (clamped / usableWidth) * range
                 if (steps > 0 && range > 0f) {
                     val stepSize = range / (steps + 1)
-                    newValue = (round((newValue - valueRange.start) / stepSize) * stepSize) + valueRange.start
+                    newValue =
+                        (round((newValue - valueRange.start) / stepSize) * stepSize) + valueRange.start
                 }
                 onValueChange(newValue.coerceIn(valueRange.start, valueRange.endInclusive))
             }

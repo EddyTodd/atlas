@@ -1,8 +1,6 @@
 package com.ynmidk.atlas.core
 
 import androidx.compose.ui.text.TextStyle
-import com.ynmidk.atlas.core.ButtonSize
-import com.ynmidk.atlas.core.ButtonVariant
 import com.ynmidk.atlas.theme.AtlasTextStyle
 
 open class AtlasTypography {

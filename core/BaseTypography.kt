@@ -8,8 +8,6 @@ import androidx.compose.ui.text.font.FontVariation
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import com.ynmidk.atlas.R
-import com.ynmidk.atlas.core.ButtonSize
-import com.ynmidk.atlas.core.ButtonVariant
 import com.ynmidk.atlas.theme.AtlasTextStyle
 
 @OptIn(ExperimentalTextApi::class)
@@ -91,7 +89,7 @@ object BaseTypography : AtlasTypography() {
         AtlasTextStyle.Subtitle -> TextStyle(
             fontFamily = DefaultBodyFontFamily,
             fontSize = ComponentTokens.SubtitleSize,
-            fontWeight = FontWeight.W400,
+            fontWeight = FontWeight.W700,
             letterSpacing = BaseTokens.SubtitleLetterSpacing
         )
 

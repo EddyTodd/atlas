@@ -12,10 +12,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -26,6 +26,7 @@ import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedIconButton
 import androidx.compose.material3.SecondaryTabRow
@@ -38,23 +39,25 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.CompositingStrategy
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
@@ -65,22 +68,16 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.ynmidk.atlas.core.IconRole
-import com.ynmidk.atlas.core.atlasIcon
-import com.ynmidk.atlas.core.AtlasComponents
-import com.ynmidk.atlas.core.ButtonSize
-import com.ynmidk.atlas.core.ButtonVariant
-import com.ynmidk.atlas.core.CardStyle
-import com.ynmidk.atlas.core.IconButtonVariant
+import com.ynmidk.atlas.theme.AtlasTextStyle
 import com.ynmidk.atlas.theme.LocalAtlasTypography
 import com.ynmidk.atlas.theme.LocalColors
-import com.ynmidk.atlas.theme.AtlasTextStyle
+import java.util.Locale
 import android.graphics.Paint as AndroidPaint
-import androidx.compose.ui.graphics.luminance
 
 open class BaseAtlasComponents : AtlasComponents() {
 
     private val cardShape = RoundedCornerShape(BaseTokens.CardCornerRadius)
+
     private companion object {
         const val LauncherIconResName = "ic_launcher_foreground"
     }
@@ -177,6 +174,11 @@ open class BaseAtlasComponents : AtlasComponents() {
     override fun Text(text: String, style: AtlasTextStyle) {
         val colors = LocalColors.current
         val typography = LocalAtlasTypography.current
+        val resolvedText = if (style == AtlasTextStyle.Subtitle) {
+            text.uppercase(Locale.getDefault())
+        } else {
+            text
+        }
         val color = when (style) {
             AtlasTextStyle.DisplayTitle -> colors.text
             AtlasTextStyle.Title -> colors.text
@@ -192,7 +194,7 @@ open class BaseAtlasComponents : AtlasComponents() {
             AtlasTextStyle.Overline -> colors.textMuted
         }
         Text(
-            text = text,
+            text = resolvedText,
             style = typography.textStyle(style),
             color = color
         )
@@ -489,7 +491,7 @@ open class BaseAtlasComponents : AtlasComponents() {
     @Composable
     override fun AppLogoBadge(
         modifier: Modifier,
-        badgeSize: androidx.compose.ui.unit.Dp
+        badgeSize: Dp
     ) {
         val colors = LocalColors.current
         val context = LocalContext.current
@@ -500,7 +502,7 @@ open class BaseAtlasComponents : AtlasComponents() {
                 context.packageName
             )
         }
-        val iconSize = badgeSize * 0.58f
+        val iconSize = badgeSize * 0.8f
         val cornerRadius = badgeSize / 4
         val shape = RoundedCornerShape(cornerRadius)
         val shadowColor = if (colors.secondaryCardBg.luminance() > 0.5f) {
@@ -740,6 +742,23 @@ open class BaseAtlasComponents : AtlasComponents() {
         }
     }
 
+    @Composable
+    @OptIn(ExperimentalMaterial3Api::class)
+    override fun BottomDrawer(
+        onDismiss: () -> Unit,
+        content: @Composable () -> Unit
+    ) {
+        val colors = LocalColors.current
+        val bottomSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+        ModalBottomSheet(
+            onDismissRequest = onDismiss,
+            containerColor = colors.bg,
+            sheetState = bottomSheetState
+        ) {
+            content()
+        }
+    }
+
     private fun buttonShapeFor(size: ButtonSize): RoundedCornerShape = RoundedCornerShape(
         if (size == ButtonSize.Regular) BaseTokens.ButtonCornerRadiusRegular else BaseTokens.ButtonCornerRadiusCompact
     )
@@ -760,7 +779,7 @@ open class BaseAtlasComponents : AtlasComponents() {
 
     private fun Modifier.primaryButtonShadow(
         shadowColor: Color,
-        cornerRadius: androidx.compose.ui.unit.Dp
+        cornerRadius: Dp
     ): Modifier = graphicsLayer(clip = false).drawBehind {
         val radius = cornerRadius.toPx()
         val offsetY = BaseTokens.PrimaryShadowYOffset.toPx()

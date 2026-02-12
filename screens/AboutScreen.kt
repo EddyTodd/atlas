@@ -10,14 +10,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.ynmidk.atlas.core.CardStyle
@@ -37,7 +38,9 @@ internal fun DefaultAboutScreen(
     onOpenLicenses: (() -> Unit)?
 ) {
     val context = LocalContext.current
+    val configuration = LocalConfiguration.current
     val c = LocalAtlasComponents.current
+    val logoSize = (configuration.screenWidthDp.dp / 4)
 
     val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
     val appName = context.applicationInfo.loadLabel(context.packageManager).toString()
@@ -83,7 +86,7 @@ internal fun DefaultAboutScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
-                    c.AppLogoBadge()
+                    c.AppLogoBadge(badgeSize = logoSize)
                     Spacer(modifier = Modifier.height(8.dp))
                     c.Text(appName, AtlasTextStyle.Title)
                 }

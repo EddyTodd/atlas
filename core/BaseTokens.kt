@@ -3,7 +3,6 @@ package com.ynmidk.atlas.core
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ynmidk.atlas.core.ButtonSize
 
 internal object BaseTokens {
     // Shapes & layout

@@ -7,6 +7,7 @@ import com.ynmidk.atlas.core.ThemeDefinition
 @Composable
 fun AtlasTheme(
     definition: ThemeDefinition,
+    navigation: AtlasNavigation = AtlasNavigation(),
     content: @Composable () -> Unit
 ) {
     CompositionLocalProvider(
@@ -14,6 +15,7 @@ fun AtlasTheme(
         LocalAtlasScreens provides definition.screens,
         LocalAtlasTypography provides definition.typography,
         LocalColors provides definition.colors,
+        LocalAtlasNavigation provides navigation,
         content = content
     )
 }

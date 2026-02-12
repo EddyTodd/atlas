@@ -5,43 +5,30 @@ import androidx.compose.runtime.Composable
 object DefaultScreens : AtlasScreens {
     @Composable
     override fun HomeScreen(
-        displayTitle: String?,
-        subtitle: String,
-        difficulties: List<HomeDifficulty>,
-        selectedDifficultyId: String,
-        onDifficultySelected: (String) -> Unit,
-        continueTitle: String?,
-        continueSubtitle: String?,
+        continueDescription: String?,
         onContinue: (() -> Unit)?,
-        onBack: (() -> Unit)?,
-        onOpenSettings: (() -> Unit)?,
+        newGameOptionsContent: (@Composable () -> Unit)?,
         onStartGame: () -> Unit
-    ) = HomeScreen(
-        displayTitle = displayTitle,
-        continueTitle = continueTitle,
-        continueSubtitle = continueSubtitle,
+    ) = com.ynmidk.atlas.screens.HomeScreen(
+        continueDescription = continueDescription,
         onContinue = onContinue,
-        onOpenSettings = onOpenSettings,
+        newGameOptionsContent = newGameOptionsContent,
         onStartGame = onStartGame
     )
 
     @Composable
-    override fun SettingsMainScreen(
-        title: String,
-        subtitle: String,
-        sections: List<SettingsSection>,
-        onBack: (() -> Unit)?,
-        onSelectItem: (SettingsItem) -> Unit
-    ) = SettingsScreen(
-        title = title,
-        sections = sections,
-        onBack = onBack,
-        onSelectItem = onSelectItem
+    override fun GameScreen(
+        gameplayView: @Composable () -> Unit
+    ) = com.ynmidk.atlas.screens.GameScreen(
+        gameplayView = gameplayView
     )
 
     @Composable
+    override fun SettingsMainScreen() = SettingsScreen()
+
+    @Composable
     override fun AboutScreen(
-        appName: String?,
+        title: String?,
         developer: String?,
         design: String,
         version: String?,
@@ -59,14 +46,16 @@ object DefaultScreens : AtlasScreens {
     )
 
     @Composable
-    override fun TermsOfServiceScreen(onBack: (() -> Unit)?) = com.ynmidk.atlas.screens.TermsOfServiceScreen(
-        onBack = onBack
-    )
+    override fun TermsOfServiceScreen(onBack: (() -> Unit)?) =
+        com.ynmidk.atlas.screens.TermsOfServiceScreen(
+            onBack = onBack
+        )
 
     @Composable
-    override fun PrivacyPolicyScreen(onBack: (() -> Unit)?) = com.ynmidk.atlas.screens.PrivacyPolicyScreen(
-        onBack = onBack
-    )
+    override fun PrivacyPolicyScreen(onBack: (() -> Unit)?) =
+        com.ynmidk.atlas.screens.PrivacyPolicyScreen(
+            onBack = onBack
+        )
 
     @Composable
     override fun LicensesScreen(onBack: (() -> Unit)?) = com.ynmidk.atlas.screens.LicensesScreen(
