@@ -124,26 +124,33 @@ internal fun HomeScreen(
 
     if (showNewGameOptions && newGameOptionsContent != null) {
         c.BottomDrawer(onDismiss = { showNewGameOptions = false }) {
-            Column(
+            Box(
                 modifier = Modifier
-                    .fillMaxWidth(0.8f)
-                    .padding(horizontal = 24.dp, vertical = 8.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
+                contentAlignment = Alignment.Center
             ) {
-                newGameOptionsContent()
-                Spacer(modifier = Modifier.height(16.dp))
-                c.Button(
-                    modifier = Modifier.fillMaxWidth(),
-                    variant = ButtonVariant.Primary,
-                    enabled = true,
-                    onClick = {
-                        showNewGameOptions = false
-                        onStartGame()
-                    },
-                    label = "New Game"
-                )
-                Spacer(modifier = Modifier.height(44.dp))
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth(0.9f)
+                        .padding(horizontal = 24.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    newGameOptionsContent()
+                    Spacer(modifier = Modifier.height(16.dp))
+                    c.Button(
+                        modifier = Modifier.fillMaxWidth(),
+                        variant = ButtonVariant.Primary,
+                        enabled = true,
+                        onClick = {
+                            showNewGameOptions = false
+                            onStartGame()
+                        },
+                        label = "New Game"
+                    )
+                    Spacer(modifier = Modifier.height(44.dp))
+                }
             }
         }
     }

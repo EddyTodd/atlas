@@ -505,11 +505,7 @@ open class BaseAtlasComponents : AtlasComponents() {
         val iconSize = badgeSize * 0.8f
         val cornerRadius = badgeSize / 4
         val shape = RoundedCornerShape(cornerRadius)
-        val shadowColor = if (colors.secondaryCardBg.luminance() > 0.5f) {
-            Color.Black
-        } else {
-            Color.White
-        }
+        val shadowColor = Color.Black
 
         Box(
             modifier = modifier
