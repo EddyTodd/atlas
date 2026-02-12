@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -127,14 +126,13 @@ internal fun HomeScreen(
         c.BottomDrawer(onDismiss = { showNewGameOptions = false }) {
             Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight()
+                    .fillMaxWidth(0.8f)
                     .padding(horizontal = 24.dp, vertical = 8.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 newGameOptionsContent()
-                Spacer(modifier = Modifier.weight(1f))
+                Spacer(modifier = Modifier.height(16.dp))
                 c.Button(
                     modifier = Modifier.fillMaxWidth(),
                     variant = ButtonVariant.Primary,
@@ -145,7 +143,7 @@ internal fun HomeScreen(
                     },
                     label = "New Game"
                 )
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(44.dp))
             }
         }
     }
