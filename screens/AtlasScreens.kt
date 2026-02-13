@@ -1,5 +1,6 @@
 package com.ynmidk.atlas.screens
 
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.runtime.Composable
 
 data class HomeDifficulty(
@@ -43,7 +44,7 @@ data class ThemeOption(
     val id: String,
     val name: String,
     val subtitle: String,
-    val preview: (@Composable () -> Unit)? = null
+    val preview: (@Composable BoxScope.() -> Unit)? = null
 )
 
 interface AtlasScreens {

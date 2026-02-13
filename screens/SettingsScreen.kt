@@ -79,7 +79,7 @@ internal fun SettingsScreen() {
                     .padding(innerPadding)
                     .fadeTopEdge()
                     .verticalScroll(rememberScrollState())
-                    .padding(32.dp),
+                    .padding(horizontal = 32.dp, vertical = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 sections.forEach { section ->

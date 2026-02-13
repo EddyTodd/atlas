@@ -3,11 +3,9 @@ package com.ynmidk.atlas.screens
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
@@ -30,8 +28,6 @@ internal fun DefaultAchievementsScreen(
     onBack: (() -> Unit)?
 ) {
     val c = LocalAtlasComponents.current
-    val colors = LocalColors.current
-    val typography = LocalAtlasTypography.current
     Scaffold(
         containerColor = Color.Transparent,
         topBar = {
@@ -48,7 +44,7 @@ internal fun DefaultAchievementsScreen(
                     .padding(innerPadding)
                     .fadeTopEdge()
                     .verticalScroll(rememberScrollState())
-                    .padding(16.dp),
+                    .padding(horizontal = 32.dp, vertical = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 achievements.forEach { achievement ->

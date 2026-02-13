@@ -3,6 +3,7 @@ package com.ynmidk.atlas.core
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -201,7 +202,7 @@ open class AtlasComponents {
 @Composable
 fun AtlasThemeOptionCard(
     name: String,
-    preview: (@Composable () -> Unit)?,
+    preview: (@Composable BoxScope.() -> Unit)?,
     isActive: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -228,14 +229,14 @@ fun AtlasThemeOptionCard(
 
 @Composable
 fun AtlasThemePreviewSurface(
-    preview: (@Composable () -> Unit)?
+    preview: (@Composable BoxScope.() -> Unit)?
 ) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .heightIn(min = 54.dp)
     ) {
-        preview?.invoke() ?: AtlasThemePreviewPlaceholder()
+        preview?.invoke(this) ?: AtlasThemePreviewPlaceholder()
     }
 }
 

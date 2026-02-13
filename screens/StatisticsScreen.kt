@@ -41,7 +41,7 @@ internal fun StatisticsScreen(
                     .padding(innerPadding)
                     .fadeTopEdge()
                     .verticalScroll(rememberScrollState())
-                    .padding(16.dp),
+                    .padding(horizontal = 32.dp, vertical = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 stats.forEach { stat ->

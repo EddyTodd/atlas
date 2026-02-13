@@ -3,11 +3,11 @@ package com.ynmidk.atlas.screens
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.GenericShape
@@ -77,17 +77,12 @@ fun ThemeScreen(
             subtitle = "Mode",
             preview = {
                 DiagonalSystemPreview(
-                    lightPreview = {
-                        preview(lightModeThemeId) {
-                            onThemeSelectionChange(themeSelection.copy(mode = ThemeMode.System))
-                        }
-                    },
-                    darkPreview = {
-                        preview(darkModeThemeId) {
-                            onThemeSelectionChange(themeSelection.copy(mode = ThemeMode.System))
-                        }
-                    }
-                )
+                    themePreview = preview,
+                    lightThemeId = lightModeThemeId,
+                    darkThemeId = darkModeThemeId
+                ) {
+                    onThemeSelectionChange(themeSelection.copy(mode = ThemeMode.System))
+                }
             }
         ),
         ThemeOption(
@@ -168,7 +163,7 @@ internal fun DefaultThemeScreen(
                     .padding(innerPadding)
                     .fadeTopEdge()
                     .verticalScroll(rememberScrollState())
-                    .padding(16.dp),
+                    .padding(horizontal = 24.dp, vertical = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 sectionOrder(grouped.keys).forEach { section ->
@@ -216,8 +211,10 @@ private fun sectionOrder(keys: Set<String>): List<String> {
 
 @Composable
 private fun DiagonalSystemPreview(
-    lightPreview: @Composable () -> Unit,
-    darkPreview: @Composable () -> Unit
+    themePreview: @Composable (themeId: ThemeId, onPreviewTap: () -> Unit) -> Unit,
+    lightThemeId: ThemeId,
+    darkThemeId: ThemeId,
+    onPreviewTap: () -> Unit
 ) {
     val lightShape = remember {
         GenericShape { size, _ ->
@@ -236,24 +233,19 @@ private fun DiagonalSystemPreview(
         }
     }
 
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(54.dp)
-    ) {
+    Box {
         Box(
             modifier = Modifier
-                .matchParentSize()
                 .clip(lightShape)
         ) {
-            lightPreview()
+            themePreview(lightThemeId, onPreviewTap)
         }
         Box(
             modifier = Modifier
                 .matchParentSize()
                 .clip(darkShape)
         ) {
-            darkPreview()
+            themePreview(darkThemeId, onPreviewTap)
         }
     }
 }
@@ -269,7 +261,8 @@ private fun HighContrastCard(
     c.Card(
         modifier = Modifier.fillMaxWidth(),
         style = if (enabled) CardStyle.Active else CardStyle.Tappable,
-        onClick = { onToggle(!enabled) }
+        onClick = { onToggle(!enabled) },
+        contentPadding = PaddingValues(horizontal = 14.dp, vertical = 8.dp)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
