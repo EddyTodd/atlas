@@ -25,7 +25,7 @@ data class AchievementItem(
     val name: String,
     val description: String,
     val unlocked: Boolean,
-    val status: String
+    val status: String? = null
 )
 
 data class StatisticItem(
