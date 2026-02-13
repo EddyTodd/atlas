@@ -9,6 +9,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.ynmidk.atlas.core.BaseAtlasComponents
 import com.ynmidk.atlas.core.ButtonSize
@@ -25,10 +26,11 @@ object AuroraThemeComponents : BaseAtlasComponents() {
         enabled: Boolean,
         onClick: () -> Unit,
         label: String,
-        modifier: Modifier
+        modifier: Modifier,
+        heightOverride: Dp?
     ) {
         val colors = LocalColors.current
-        val height = if (size == ButtonSize.Regular) {
+        val height = heightOverride ?: if (size == ButtonSize.Regular) {
             ComponentTokens.ButtonRegularHeight
         } else {
             ComponentTokens.ButtonCompactHeight

@@ -87,7 +87,8 @@ open class AtlasComponents {
         enabled: Boolean,
         onClick: () -> Unit,
         label: String,
-        modifier: Modifier = Modifier
+        modifier: Modifier = Modifier,
+        heightOverride: Dp? = null
     ) {
         notImplemented("Button")
     }
@@ -99,7 +100,9 @@ open class AtlasComponents {
         role: IconRole,
         enabled: Boolean,
         tintColor: Color? = null,
-        onClick: () -> Unit
+        onClick: () -> Unit,
+        modifier: Modifier = Modifier,
+        sizeOverride: Dp? = null
     ) {
         notImplemented("IconButton")
     }

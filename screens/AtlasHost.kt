@@ -38,6 +38,7 @@ fun AtlasHost(
     onStartGame: () -> Unit,
     newGameOptionsContent: (@Composable () -> Unit)?,
     gameplayView: @Composable () -> Unit,
+    showAdBanner: Boolean = true,
     themeSelection: ThemeSelection,
     systemInDarkTheme: Boolean,
     onThemeSelectionChange: (ThemeSelection) -> Unit,
@@ -119,6 +120,7 @@ fun AtlasHost(
             )
 
             AtlasRoute.Game -> screens.GameScreen(
+                showAdBanner = showAdBanner,
                 gameplayView = gameplayView
             )
 

@@ -21,7 +21,6 @@ import com.ynmidk.atlas.theme.LocalAtlasComponents
 
 @Composable
 internal fun DefaultAchievementsScreen(
-    summary: String,
     achievements: List<AchievementItem>,
     onBack: (() -> Unit)?
 ) {
@@ -45,8 +44,6 @@ internal fun DefaultAchievementsScreen(
                     .padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                c.Text(summary, AtlasTextStyle.Muted)
-
                 achievements.forEach { achievement ->
                     c.Card(style = if (achievement.unlocked) CardStyle.Active else CardStyle.Regular) {
                         Row(

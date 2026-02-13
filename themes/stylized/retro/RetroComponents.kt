@@ -136,9 +136,11 @@ object RetroThemeComponents : BaseAtlasComponents() {
         enabled: Boolean,
         onClick: () -> Unit,
         label: String,
-        modifier: Modifier
+        modifier: Modifier,
+        heightOverride: Dp?
     ) {
         val colors = LocalColors.current
+        val buttonHeight = heightOverride ?: buttonHeightFor(size)
         val borderColor = when (variant) {
             ButtonVariant.Primary -> if (enabled) RetroTokens.Black else null
             ButtonVariant.Secondary -> null
@@ -165,7 +167,7 @@ object RetroThemeComponents : BaseAtlasComponents() {
         RetroButtonSurface(
             enabled = enabled,
             onClick = onClick,
-            modifier = modifier.height(buttonHeightFor(size)),
+            modifier = modifier.height(buttonHeight),
             baseColor = baseColor,
             borderColor = borderColor,
             disabledContentColor = RetroTokens.DarkShadow,
@@ -182,22 +184,23 @@ object RetroThemeComponents : BaseAtlasComponents() {
         role: IconRole,
         enabled: Boolean,
         tintColor: Color?,
-        onClick: () -> Unit
+        onClick: () -> Unit,
+        modifier: Modifier,
+        sizeOverride: Dp?
     ) {
         val colors = LocalColors.current
+        val iconButtonSize = sizeOverride ?: if (size == ButtonSize.Regular) {
+            ComponentTokens.ButtonRegularHeight
+        } else {
+            ComponentTokens.ButtonCompactHeight
+        }
         val isPrimaryEnabled = enabled && variant == IconButtonVariant.Primary
 
         RetroButtonSurface(
             enabled = enabled,
             onClick = onClick,
             baseColor = colors.cardBg,
-            modifier = Modifier.size(
-                if (size == ButtonSize.Regular) {
-                    ComponentTokens.ButtonRegularHeight
-                } else {
-                    ComponentTokens.ButtonCompactHeight
-                }
-            ),
+            modifier = modifier.size(iconButtonSize),
             borderColor = if (isPrimaryEnabled) RetroTokens.Black else null,
             bevelSize = if (isPrimaryEnabled) RetroTokens.PrimaryBevelSize else RetroTokens.BevelSize,
             disabledContentColor = RetroTokens.DarkShadow

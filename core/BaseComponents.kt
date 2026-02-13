@@ -207,12 +207,14 @@ open class BaseAtlasComponents : AtlasComponents() {
         enabled: Boolean,
         onClick: () -> Unit,
         label: String,
-        modifier: Modifier
+        modifier: Modifier,
+        heightOverride: Dp?
     ) {
         val colors = LocalColors.current
         val typography = LocalAtlasTypography.current
         val shape = buttonShapeFor(size)
         val labelTextStyle = typography.buttonTextStyle(variant, size)
+        val buttonHeight = heightOverride ?: buttonHeightFor(size)
 
         when (variant) {
             ButtonVariant.Primary -> {
@@ -234,7 +236,7 @@ open class BaseAtlasComponents : AtlasComponents() {
                     shape = shape,
                     contentPadding = buttonContentPaddingFor(variant, size),
                     modifier = modifier
-                        .height(buttonHeightFor(size))
+                        .height(buttonHeight)
                         .then(shadowModifier),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = colors.primary,
@@ -256,7 +258,7 @@ open class BaseAtlasComponents : AtlasComponents() {
                     enabled = enabled,
                     shape = shape,
                     contentPadding = buttonContentPaddingFor(variant, size),
-                    modifier = modifier.height(buttonHeightFor(size)),
+                    modifier = modifier.height(buttonHeight),
                     border = BorderStroke(BaseTokens.BorderWidth, colors.btnBorder),
                     colors = ButtonDefaults.outlinedButtonColors(
                         contentColor = colors.btnText,
@@ -273,7 +275,7 @@ open class BaseAtlasComponents : AtlasComponents() {
                     enabled = enabled,
                     shape = shape,
                     contentPadding = buttonContentPaddingFor(variant, size),
-                    modifier = modifier.height(buttonHeightFor(size)),
+                    modifier = modifier.height(buttonHeight),
                     border = BorderStroke(BaseTokens.BorderWidth, colors.accent),
                     colors = ButtonDefaults.outlinedButtonColors(
                         contentColor = colors.accent,
@@ -293,7 +295,7 @@ open class BaseAtlasComponents : AtlasComponents() {
                     enabled = enabled,
                     shape = shape,
                     contentPadding = buttonContentPaddingFor(variant, size),
-                    modifier = modifier.height(buttonHeightFor(size)),
+                    modifier = modifier.height(buttonHeight),
                     colors = ButtonDefaults.textButtonColors(
                         contentColor = textColor,
                         disabledContentColor = textColor.copy(alpha = BaseTokens.DisabledTertiaryContentAlpha)
@@ -312,10 +314,13 @@ open class BaseAtlasComponents : AtlasComponents() {
         role: IconRole,
         enabled: Boolean,
         tintColor: Color?,
-        onClick: () -> Unit
+        onClick: () -> Unit,
+        modifier: Modifier,
+        sizeOverride: Dp?
     ) {
         val colors = LocalColors.current
         val icon = atlasIcon(role)
+        val iconButtonSize = sizeOverride ?: iconButtonSizeFor(size)
         val iconSize = if (size == ButtonSize.Regular) {
             BaseTokens.IconPrimarySize
         } else {
@@ -333,8 +338,8 @@ open class BaseAtlasComponents : AtlasComponents() {
                     onClick = onClick,
                     enabled = enabled,
                     shape = RoundedCornerShape(BaseTokens.ButtonCornerRadiusCompact),
-                    modifier = Modifier
-                        .size(iconButtonSizeFor(size))
+                    modifier = modifier
+                        .size(iconButtonSize)
                         .then(shadowModifier),
                     colors = IconButtonDefaults.filledIconButtonColors(
                         containerColor = colors.primary,
@@ -356,7 +361,7 @@ open class BaseAtlasComponents : AtlasComponents() {
                     onClick = onClick,
                     enabled = enabled,
                     shape = RoundedCornerShape(BaseTokens.ButtonCornerRadiusCompact),
-                    modifier = Modifier.size(iconButtonSizeFor(size)),
+                    modifier = modifier.size(iconButtonSize),
                     colors = IconButtonDefaults.filledIconButtonColors(
                         containerColor = colors.cardBg,
                         contentColor = colors.text,
@@ -377,7 +382,7 @@ open class BaseAtlasComponents : AtlasComponents() {
                     onClick = onClick,
                     enabled = enabled,
                     shape = RoundedCornerShape(BaseTokens.ButtonCornerRadiusCompact),
-                    modifier = Modifier.size(iconButtonSizeFor(size)),
+                    modifier = modifier.size(iconButtonSize),
                     border = BorderStroke(BaseTokens.BorderWidth, colors.btnBorder),
                     colors = IconButtonDefaults.outlinedIconButtonColors(
                         contentColor = colors.text,
@@ -398,7 +403,7 @@ open class BaseAtlasComponents : AtlasComponents() {
                     onClick = onClick,
                     enabled = enabled,
                     shape = RoundedCornerShape(BaseTokens.ButtonCornerRadiusCompact),
-                    modifier = Modifier.size(iconButtonSizeFor(size)),
+                    modifier = modifier.size(iconButtonSize),
                     border = BorderStroke(BaseTokens.BorderWidth, colors.btnBorder),
                     colors = IconButtonDefaults.outlinedIconButtonColors(
                         contentColor = color,

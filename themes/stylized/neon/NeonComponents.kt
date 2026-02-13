@@ -34,6 +34,7 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.ynmidk.atlas.core.BaseAtlasComponents
 import com.ynmidk.atlas.core.BaseTokens
@@ -173,11 +174,13 @@ object NeonThemeComponents : BaseAtlasComponents() {
         enabled: Boolean,
         onClick: () -> Unit,
         label: String,
-        modifier: Modifier
+        modifier: Modifier,
+        heightOverride: Dp?
     ) {
+        val buttonHeight = heightOverride ?: buttonHeightFor(size)
         when (variant) {
             ButtonVariant.Primary -> {
-                NeonButton(onClick, enabled, NeonTokens.Magenta, size, modifier) {
+                NeonButton(onClick, enabled, NeonTokens.Magenta, buttonHeight, modifier) {
                     NeonText(
                         text = label,
                         glowColor = if (enabled) NeonTokens.Magenta else Color.Transparent,
@@ -191,7 +194,7 @@ object NeonThemeComponents : BaseAtlasComponents() {
             }
 
             ButtonVariant.Secondary -> {
-                NeonButton(onClick, enabled, NeonTokens.Cyan, size, modifier) {
+                NeonButton(onClick, enabled, NeonTokens.Cyan, buttonHeight, modifier) {
                     NeonText(
                         text = label,
                         glowColor = if (enabled) NeonTokens.Cyan else Color.Transparent,
@@ -204,7 +207,7 @@ object NeonThemeComponents : BaseAtlasComponents() {
             }
 
             ButtonVariant.Outline -> {
-                NeonButton(onClick, enabled, NeonTokens.White, size, modifier) {
+                NeonButton(onClick, enabled, NeonTokens.White, buttonHeight, modifier) {
                     NeonText(
                         text = label,
                         glowColor = if (enabled) NeonTokens.Cyan else Color.Transparent,
@@ -220,7 +223,7 @@ object NeonThemeComponents : BaseAtlasComponents() {
                 TextButton(
                     onClick = onClick,
                     enabled = enabled,
-                    modifier = modifier.height(buttonHeightFor(size)),
+                    modifier = modifier.height(buttonHeight),
                     contentPadding = ComponentTokens.ButtonContentPadding,
                     colors = ButtonDefaults.textButtonColors(
                         containerColor = Color.Transparent,
@@ -243,7 +246,7 @@ object NeonThemeComponents : BaseAtlasComponents() {
                 TextButton(
                     onClick = onClick,
                     enabled = enabled,
-                    modifier = modifier.height(buttonHeightFor(size)),
+                    modifier = modifier.height(buttonHeight),
                     contentPadding = ComponentTokens.ButtonContentPadding,
                     colors = ButtonDefaults.textButtonColors(
                         containerColor = Color.Transparent,
@@ -271,8 +274,15 @@ object NeonThemeComponents : BaseAtlasComponents() {
         role: IconRole,
         enabled: Boolean,
         tintColor: Color?,
-        onClick: () -> Unit
+        onClick: () -> Unit,
+        modifier: Modifier,
+        sizeOverride: Dp?
     ) {
+        val iconButtonSize = sizeOverride ?: if (size == ButtonSize.Regular) {
+            ComponentTokens.ButtonRegularHeight
+        } else {
+            ComponentTokens.ButtonCompactHeight
+        }
         val glowColor = when (variant) {
             IconButtonVariant.Primary -> NeonTokens.Magenta
             IconButtonVariant.Secondary,
@@ -282,13 +292,7 @@ object NeonThemeComponents : BaseAtlasComponents() {
         }
         NeonIconButton(
             onClick = onClick,
-            modifier = Modifier.size(
-                if (size == ButtonSize.Regular) {
-                    ComponentTokens.ButtonRegularHeight
-                } else {
-                    ComponentTokens.ButtonCompactHeight
-                }
-            ),
+            modifier = modifier.size(iconButtonSize),
             glowColor = glowColor,
             enabled = enabled
         ) {
@@ -507,7 +511,7 @@ object NeonThemeComponents : BaseAtlasComponents() {
         onClick: () -> Unit,
         enabled: Boolean,
         glowColor: Color,
-        size: ButtonSize,
+        buttonHeight: Dp,
         modifier: Modifier,
         content: @Composable RowScope.() -> Unit
     ) {
@@ -521,7 +525,7 @@ object NeonThemeComponents : BaseAtlasComponents() {
             onClick = onClick,
             enabled = enabled,
             modifier = modifier
-                .height(buttonHeightFor(size))
+                .height(buttonHeight)
                 .neonSurface(
                     glowColor = borderColor,
                     cornerRadius = NeonTokens.ButtonCornerRadius,

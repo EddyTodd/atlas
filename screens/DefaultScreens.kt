@@ -18,8 +18,10 @@ object DefaultScreens : AtlasScreens {
 
     @Composable
     override fun GameScreen(
+        showAdBanner: Boolean,
         gameplayView: @Composable () -> Unit
     ) = com.ynmidk.atlas.screens.GameScreen(
+        showAdBanner = showAdBanner,
         gameplayView = gameplayView
     )
 
@@ -64,11 +66,9 @@ object DefaultScreens : AtlasScreens {
 
     @Composable
     override fun AchievementsScreen(
-        summary: String,
         achievements: List<AchievementItem>,
         onBack: (() -> Unit)?
     ) = DefaultAchievementsScreen(
-        summary = summary,
         achievements = achievements,
         onBack = onBack
     )

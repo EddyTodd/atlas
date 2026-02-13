@@ -32,6 +32,7 @@ import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.ynmidk.atlas.core.BaseAtlasComponents
 import com.ynmidk.atlas.core.ButtonSize
@@ -77,7 +78,9 @@ object BlueprintThemeComponents : BaseAtlasComponents() {
                         role = IconRole.Back,
                         enabled = true,
                         tintColor = null,
-                        onClick = onLeadingIconClick
+                        onClick = onLeadingIconClick,
+                        modifier = Modifier,
+                        sizeOverride = null
                     )
                 }
             },
@@ -89,7 +92,9 @@ object BlueprintThemeComponents : BaseAtlasComponents() {
                         role = IconRole.Settings,
                         enabled = true,
                         tintColor = null,
-                        onClick = onTrailingIconClick
+                        onClick = onTrailingIconClick,
+                        modifier = Modifier,
+                        sizeOverride = null
                     )
                 }
             },
@@ -129,13 +134,16 @@ object BlueprintThemeComponents : BaseAtlasComponents() {
         enabled: Boolean,
         onClick: () -> Unit,
         label: String,
-        modifier: Modifier
+        modifier: Modifier,
+        heightOverride: Dp?
     ) {
+        val buttonHeight = heightOverride ?: buttonHeightFor(size)
         when (variant) {
             ButtonVariant.Primary -> {
                 BlueprintPrimaryButton(
                     text = label,
                     size = size,
+                    buttonHeight = buttonHeight,
                     enabled = enabled,
                     onClick = onClick,
                     modifier = modifier
@@ -146,6 +154,7 @@ object BlueprintThemeComponents : BaseAtlasComponents() {
                 BlueprintSecondaryButton(
                     text = label,
                     size = size,
+                    buttonHeight = buttonHeight,
                     enabled = enabled,
                     onClick = onClick,
                     modifier = modifier
@@ -157,7 +166,7 @@ object BlueprintThemeComponents : BaseAtlasComponents() {
                 TextButton(
                     onClick = onClick,
                     enabled = enabled,
-                    modifier = modifier.height(buttonHeightFor(size)),
+                    modifier = modifier.height(buttonHeight),
                     contentPadding = ComponentTokens.ButtonContentPadding,
                     colors = ButtonDefaults.textButtonColors(
                         contentColor = colors.primary,
@@ -179,7 +188,7 @@ object BlueprintThemeComponents : BaseAtlasComponents() {
                 TextButton(
                     onClick = onClick,
                     enabled = enabled,
-                    modifier = modifier.height(buttonHeightFor(size)),
+                    modifier = modifier.height(buttonHeight),
                     contentPadding = ComponentTokens.ButtonContentPadding
                 ) {
                     Text(
@@ -201,7 +210,9 @@ object BlueprintThemeComponents : BaseAtlasComponents() {
         role: IconRole,
         enabled: Boolean,
         tintColor: Color?,
-        onClick: () -> Unit
+        onClick: () -> Unit,
+        modifier: Modifier,
+        sizeOverride: Dp?
     ) {
         super.IconButton(
             variant = variant,
@@ -209,7 +220,9 @@ object BlueprintThemeComponents : BaseAtlasComponents() {
             role = role,
             enabled = enabled,
             tintColor = tintColor,
-            onClick = onClick
+            onClick = onClick,
+            modifier = modifier,
+            sizeOverride = sizeOverride
         )
     }
 
@@ -394,6 +407,7 @@ object BlueprintThemeComponents : BaseAtlasComponents() {
     private fun BlueprintPrimaryButton(
         text: String,
         size: ButtonSize,
+        buttonHeight: Dp,
         enabled: Boolean,
         onClick: () -> Unit,
         modifier: Modifier
@@ -402,7 +416,7 @@ object BlueprintThemeComponents : BaseAtlasComponents() {
         androidx.compose.material3.Button(
             onClick = onClick,
             enabled = enabled,
-            modifier = modifier.height(buttonHeightFor(size)),
+            modifier = modifier.height(buttonHeight),
             contentPadding = ComponentTokens.ButtonContentPadding,
             colors = ButtonDefaults.buttonColors(
                 containerColor = colors.primary,
@@ -426,6 +440,7 @@ object BlueprintThemeComponents : BaseAtlasComponents() {
     private fun BlueprintSecondaryButton(
         text: String,
         size: ButtonSize,
+        buttonHeight: Dp,
         enabled: Boolean,
         onClick: () -> Unit,
         modifier: Modifier
@@ -439,7 +454,7 @@ object BlueprintThemeComponents : BaseAtlasComponents() {
             enabled = enabled,
             modifier = modifier
                 .widthIn(min = BlueprintTokens.SecondaryButtonMinWidth)
-                .height(buttonHeightFor(size)),
+                .height(buttonHeight),
             contentPadding = ComponentTokens.ButtonContentPadding,
             shape = shape,
             border = BorderStroke(

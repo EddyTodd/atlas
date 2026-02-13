@@ -57,6 +57,7 @@ interface AtlasScreens {
 
     @Composable
     fun GameScreen(
+        showAdBanner: Boolean = true,
         gameplayView: @Composable () -> Unit
     )
 
@@ -94,7 +95,6 @@ interface AtlasScreens {
 
     @Composable
     fun AchievementsScreen(
-        summary: String,
         achievements: List<AchievementItem>,
         onBack: (() -> Unit)? = null
     )
