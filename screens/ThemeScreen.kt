@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.GenericShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -25,7 +24,7 @@ import com.ynmidk.atlas.core.AtlasThemeOptionCard
 import com.ynmidk.atlas.core.CardStyle
 import com.ynmidk.atlas.core.IconRole
 import com.ynmidk.atlas.core.atlasIcon
-import com.ynmidk.atlas.core.fadeTopEdge
+import com.ynmidk.atlas.core.atlasVerticalScroll
 import com.ynmidk.atlas.theme.AtlasTextStyle
 import com.ynmidk.atlas.theme.LocalAtlasComponents
 import com.ynmidk.atlas.theme.LocalAtlasScreens
@@ -65,6 +64,7 @@ fun ThemeScreen(
             id = MODE_LIGHT_OPTION_ID,
             name = ThemeId.DefaultLight.label,
             subtitle = "Mode",
+            iconName = "sun",
             preview = {
                 preview(lightModeThemeId) {
                     onThemeSelectionChange(themeSelection.copy(mode = ThemeMode.Light))
@@ -75,6 +75,7 @@ fun ThemeScreen(
             id = MODE_SYSTEM_OPTION_ID,
             name = "System",
             subtitle = "Mode",
+            iconName = "system",
             preview = {
                 DiagonalSystemPreview(
                     themePreview = preview,
@@ -89,6 +90,7 @@ fun ThemeScreen(
             id = MODE_DARK_OPTION_ID,
             name = ThemeId.DefaultDark.label,
             subtitle = "Mode",
+            iconName = "moon",
             preview = {
                 preview(darkModeThemeId) {
                     onThemeSelectionChange(themeSelection.copy(mode = ThemeMode.Dark))
@@ -102,6 +104,7 @@ fun ThemeScreen(
             id = id.storageKey(),
             name = id.label,
             subtitle = themeCategory(id),
+            iconName = themeIconName(id),
             preview = {
                 preview(id) {
                     onThemeSelectionChange(
@@ -161,8 +164,7 @@ internal fun DefaultThemeScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(innerPadding)
-                    .fadeTopEdge()
-                    .verticalScroll(rememberScrollState())
+                    .atlasVerticalScroll(rememberScrollState())
                     .padding(horizontal = 24.dp, vertical = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
@@ -180,6 +182,7 @@ internal fun DefaultThemeScreen(
                             rowItems.forEach { option ->
                                 AtlasThemeOptionCard(
                                     name = option.name,
+                                    iconName = option.iconName,
                                     preview = option.preview,
                                     isActive = option.id == selectedThemeId,
                                     onClick = { onSelectTheme(option) },
@@ -202,6 +205,25 @@ internal fun DefaultThemeScreen(
             }
         }
     }
+}
+
+private fun themeIconName(themeId: ThemeId): String = when (themeId) {
+    ThemeId.DefaultLight -> "sun"
+    ThemeId.DefaultDark -> "moon"
+    ThemeId.HighContrastLight,
+    ThemeId.HighContrastDark -> "high_contrast"
+
+    ThemeId.Forest -> "forest"
+    ThemeId.Ocean -> "water"
+    ThemeId.Desert -> "mountain"
+    ThemeId.Twilight -> "twilight"
+    ThemeId.Sakura -> "flower"
+    ThemeId.Monochrome -> "monotone"
+    ThemeId.Sandstone -> "sunrise"
+    ThemeId.Retro -> "retro"
+    ThemeId.Neon -> "neon"
+    ThemeId.Blueprint -> "blueprint"
+    ThemeId.Aurora -> "sunrise"
 }
 
 private fun sectionOrder(keys: Set<String>): List<String> {

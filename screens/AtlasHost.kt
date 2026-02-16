@@ -8,7 +8,10 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
+import com.ynmidk.atlas.core.BaseAtlasComponents
+import com.ynmidk.atlas.core.BaseComponents
 import com.ynmidk.atlas.theme.AtlasNavigation
+import com.ynmidk.atlas.theme.LocalAtlasComponents
 import com.ynmidk.atlas.theme.LocalAtlasNavigation
 import com.ynmidk.atlas.theme.LocalAtlasScreens
 import com.ynmidk.atlas.theme.ThemeId
@@ -53,6 +56,8 @@ fun AtlasHost(
     termsScreen: (@Composable (onBack: () -> Unit) -> Unit)? = null,
     privacyScreen: (@Composable (onBack: () -> Unit) -> Unit)? = null,
     licensesScreen: (@Composable (onBack: () -> Unit) -> Unit)? = null,
+    externalRouteRequest: AtlasRoute? = null,
+    onExternalRouteRequestConsumed: () -> Unit = {},
     onRouteChanged: (AtlasRoute) -> Unit = {}
 ) {
     val screens = LocalAtlasScreens.current
@@ -85,6 +90,12 @@ fun AtlasHost(
         onRouteChanged(route)
     }
 
+    LaunchedEffect(externalRouteRequest) {
+        val requestedRoute = externalRouteRequest ?: return@LaunchedEffect
+        navigateTo(requestedRoute)
+        onExternalRouteRequestConsumed()
+    }
+
     val navigation = remember(route) {
         AtlasNavigation(
             onNavigateBack = onNavigateBack,
@@ -103,7 +114,14 @@ fun AtlasHost(
 
     BackHandler(enabled = true, onBack = onNavigateBack)
 
-    CompositionLocalProvider(LocalAtlasNavigation provides navigation) {
+    val safeComponents = LocalAtlasComponents.current.let { components ->
+        if (components is BaseAtlasComponents) components else BaseComponents
+    }
+
+    CompositionLocalProvider(
+        LocalAtlasNavigation provides navigation,
+        LocalAtlasComponents provides safeComponents
+    ) {
         when (route) {
             AtlasRoute.Home -> screens.HomeScreen(
                 continueDescription = continueDescription,

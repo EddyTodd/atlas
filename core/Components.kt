@@ -6,14 +6,18 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.ynmidk.atlas.theme.AtlasTextStyle
@@ -202,12 +206,20 @@ open class AtlasComponents {
 @Composable
 fun AtlasThemeOptionCard(
     name: String,
+    iconName: String? = null,
     preview: (@Composable BoxScope.() -> Unit)?,
     isActive: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val c = LocalAtlasComponents.current
+    val colors = LocalColors.current
+    val context = LocalContext.current
+    val iconRes = remember(iconName, context.packageName) {
+        iconName?.let { nameKey ->
+            context.resources.getIdentifier(nameKey, "drawable", context.packageName)
+        } ?: 0
+    }
     val content: @Composable () -> Unit = {
         Column(
             modifier = Modifier.fillMaxWidth(),
@@ -215,7 +227,16 @@ fun AtlasThemeOptionCard(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             AtlasThemePreviewSurface(preview = preview)
-            c.Text(name, AtlasTextStyle.Caption)
+            if (iconRes != 0) {
+                Icon(
+                    painter = painterResource(iconRes),
+                    contentDescription = name,
+                    tint = if (isActive) colors.primary else colors.textMuted,
+                    modifier = Modifier.size(24.dp)
+                )
+            } else {
+                c.Text(name, AtlasTextStyle.Caption)
+            }
         }
     }
 
@@ -234,7 +255,7 @@ fun AtlasThemePreviewSurface(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .heightIn(min = 54.dp)
+            .aspectRatio(1f)
     ) {
         preview?.invoke(this) ?: AtlasThemePreviewPlaceholder()
     }
@@ -246,7 +267,7 @@ private fun AtlasThemePreviewPlaceholder() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(46.dp)
+            .aspectRatio(1f)
             .border(
                 width = 1.dp,
                 color = colors.btnBorder,

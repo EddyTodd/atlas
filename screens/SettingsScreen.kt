@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -19,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import com.ynmidk.atlas.core.CardStyle
 import com.ynmidk.atlas.core.IconRole
 import com.ynmidk.atlas.core.atlasIcon
-import com.ynmidk.atlas.core.fadeTopEdge
+import com.ynmidk.atlas.core.atlasVerticalScroll
 import com.ynmidk.atlas.theme.AtlasTextStyle
 import com.ynmidk.atlas.theme.LocalAtlasComponents
 import com.ynmidk.atlas.theme.LocalAtlasNavigation
@@ -77,8 +76,7 @@ internal fun SettingsScreen() {
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(innerPadding)
-                    .fadeTopEdge()
-                    .verticalScroll(rememberScrollState())
+                    .atlasVerticalScroll(rememberScrollState())
                     .padding(horizontal = 32.dp, vertical = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {

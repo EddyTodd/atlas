@@ -208,7 +208,7 @@ internal object PaletteColors {
         bg = Color(0xFFF6F4F0),
         cardBg = Color(0xFFEFECE6),
         secondaryCardBg = Color(0xFFE8E4DD),
-        cellEmpty = Color(0xFFE8E4DD),
+        cellEmpty = Color(0xFFD9D4CC),
         text = Color(0xFF1A1A1A),
         textMuted = Color(0xFF8A8580),
         badge = Color(0xFFC4523B),

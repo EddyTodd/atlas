@@ -23,10 +23,13 @@ data class SettingsItem(
 data class AchievementItem(
     val id: String,
     val icon: String,
+    val iconRes: Int? = null,
     val name: String,
     val description: String,
     val unlocked: Boolean,
-    val status: String? = null
+    val status: String? = null,
+    val progressCurrent: Int? = null,
+    val progressGoal: Int? = null
 )
 
 data class StatisticItem(
@@ -44,6 +47,7 @@ data class ThemeOption(
     val id: String,
     val name: String,
     val subtitle: String,
+    val iconName: String? = null,
     val preview: (@Composable BoxScope.() -> Unit)? = null
 )
 
@@ -97,6 +101,8 @@ interface AtlasScreens {
     @Composable
     fun AchievementsScreen(
         achievements: List<AchievementItem>,
+        highlightAchievementId: String? = null,
+        onHighlightConsumed: (() -> Unit)? = null,
         onBack: (() -> Unit)? = null
     )
 

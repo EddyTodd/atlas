@@ -67,9 +67,13 @@ object DefaultScreens : AtlasScreens {
     @Composable
     override fun AchievementsScreen(
         achievements: List<AchievementItem>,
+        highlightAchievementId: String?,
+        onHighlightConsumed: (() -> Unit)?,
         onBack: (() -> Unit)?
     ) = DefaultAchievementsScreen(
         achievements = achievements,
+        highlightAchievementId = highlightAchievementId,
+        onHighlightConsumed = onHighlightConsumed,
         onBack = onBack
     )
 

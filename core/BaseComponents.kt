@@ -507,7 +507,7 @@ open class BaseAtlasComponents : AtlasComponents() {
                 context.packageName
             )
         }
-        val iconSize = badgeSize * 0.8f
+        val iconSize = badgeSize
         val cornerRadius = badgeSize / 4
         val shape = RoundedCornerShape(cornerRadius)
         val shadowColor = Color.Black
@@ -532,7 +532,7 @@ open class BaseAtlasComponents : AtlasComponents() {
                     modifier = Modifier
                         .offset(y = BaseTokens.IconPrimaryShadowYOffset * 2f)
                         .blur(10.dp)
-                        .alpha(0.55f),
+                        .alpha(0.2f),
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
