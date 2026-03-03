@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.ynmidk.atlas.core.AtlasDividedCard
 import com.ynmidk.atlas.core.CardStyle
 import com.ynmidk.atlas.core.IconRole
 import com.ynmidk.atlas.core.atlasIcon
@@ -91,15 +92,11 @@ internal fun DefaultAboutScreen(
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                c.Card(contentPadding = PaddingValues(0.dp)) {
-                    Column {
-                        aboutItems.forEachIndexed { index, (label, value) ->
-                            AboutRow(label, value)
-                            if (index < aboutItems.lastIndex) {
-                                c.Divider()
-                            }
-                        }
-                    }
+                AtlasDividedCard(
+                    items = aboutItems,
+                    contentPadding = PaddingValues(0.dp)
+                ) { (label, value) ->
+                    AboutRow(label, value)
                 }
 
                 Spacer(modifier = Modifier.weight(1f))

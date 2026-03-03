@@ -8,8 +8,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
-import com.ynmidk.atlas.core.BaseAtlasComponents
-import com.ynmidk.atlas.core.BaseComponents
 import com.ynmidk.atlas.theme.AtlasNavigation
 import com.ynmidk.atlas.theme.LocalAtlasComponents
 import com.ynmidk.atlas.theme.LocalAtlasNavigation
@@ -114,9 +112,7 @@ fun AtlasHost(
 
     BackHandler(enabled = true, onBack = onNavigateBack)
 
-    val safeComponents = LocalAtlasComponents.current.let { components ->
-        if (components is BaseAtlasComponents) components else BaseComponents
-    }
+    val safeComponents = LocalAtlasComponents.current
 
     CompositionLocalProvider(
         LocalAtlasNavigation provides navigation,

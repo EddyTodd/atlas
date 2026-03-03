@@ -114,12 +114,15 @@ object BlueprintThemeComponents : BaseAtlasComponents() {
             text
         }
         val colors = LocalColors.current
-        val color =
-            if (style == AtlasTextStyle.Muted || style == AtlasTextStyle.Caption || style == AtlasTextStyle.CardSubtitle || style == AtlasTextStyle.Overline) {
-                colors.textMuted
-            } else {
-                colors.text
-            }
+        val color = when (style) {
+            AtlasTextStyle.Subtitle -> colors.accent
+            AtlasTextStyle.Muted,
+            AtlasTextStyle.Caption,
+            AtlasTextStyle.CardSubtitle,
+            AtlasTextStyle.Overline -> colors.textMuted
+
+            else -> colors.text
+        }
         Text(
             text = resolvedText,
             style = textStyleFor(style),

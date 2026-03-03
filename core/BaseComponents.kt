@@ -182,7 +182,7 @@ open class BaseAtlasComponents : AtlasComponents() {
         val color = when (style) {
             AtlasTextStyle.DisplayTitle -> colors.text
             AtlasTextStyle.Title -> colors.text
-            AtlasTextStyle.Subtitle -> colors.textMuted
+            AtlasTextStyle.Subtitle -> colors.accent
             AtlasTextStyle.SectionTitle -> colors.text
             AtlasTextStyle.CardTitle -> colors.text
             AtlasTextStyle.CardSubtitle -> colors.textMuted

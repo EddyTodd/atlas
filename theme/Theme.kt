@@ -12,10 +12,10 @@ fun AtlasTheme(
     navigation: AtlasNavigation = AtlasNavigation(),
     content: @Composable () -> Unit
 ) {
-    val components = if (definition.components !is BaseAtlasComponents) {
+    val components: BaseAtlasComponents = if (definition.components !is BaseAtlasComponents) {
         BaseComponents
     } else {
-        definition.components
+        definition.components as BaseAtlasComponents
     }
 
     CompositionLocalProvider(

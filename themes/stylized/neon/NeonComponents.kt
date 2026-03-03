@@ -114,12 +114,13 @@ object NeonThemeComponents : BaseAtlasComponents() {
         } else {
             text
         }
+        val colors = LocalColors.current
         val glow = when (style) {
             AtlasTextStyle.DisplayTitle,
             AtlasTextStyle.Title,
             AtlasTextStyle.SectionTitle -> NeonTokens.TitleGlowColor
 
-            AtlasTextStyle.Subtitle -> NeonTokens.Magenta
+            AtlasTextStyle.Subtitle -> colors.accent
             AtlasTextStyle.CardTitle,
             AtlasTextStyle.Body,
             AtlasTextStyle.BodyStrong,

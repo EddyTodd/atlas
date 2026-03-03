@@ -7,6 +7,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontVariation
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.sp
 import com.ynmidk.atlas.R
 import com.ynmidk.atlas.theme.AtlasTextStyle
 
@@ -88,16 +89,17 @@ object BaseTypography : AtlasTypography() {
 
         AtlasTextStyle.Subtitle -> TextStyle(
             fontFamily = DefaultBodyFontFamily,
-            fontSize = ComponentTokens.SubtitleSize,
-            fontWeight = FontWeight.W700,
-            letterSpacing = BaseTokens.SubtitleLetterSpacing
+            fontSize = 12.sp,
+            fontWeight = FontWeight.W800,
+            letterSpacing = 0.sp
         )
 
         AtlasTextStyle.SectionTitle -> TextStyle(
-            fontFamily = DefaultBodyFontFamily,
-            fontSize = ComponentTokens.SectionTitleSize,
-            fontWeight = FontWeight.W600,
-            letterSpacing = BaseTokens.SubtitleLetterSpacing
+            fontFamily = DefaultTitleFontFamily,
+            fontSize = 22.sp,
+            lineHeight = 22.sp,
+            fontWeight = FontWeight.W800,
+            letterSpacing = 0.sp
         )
 
         AtlasTextStyle.CardTitle -> TextStyle(

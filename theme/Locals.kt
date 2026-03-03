@@ -1,12 +1,13 @@
 package com.ynmidk.atlas.theme
 
 import androidx.compose.runtime.staticCompositionLocalOf
-import com.ynmidk.atlas.core.AtlasComponents
 import com.ynmidk.atlas.core.AtlasTypography
+import com.ynmidk.atlas.core.BaseAtlasComponents
+import com.ynmidk.atlas.core.BaseComponents
 import com.ynmidk.atlas.screens.AtlasScreens
 
-val LocalAtlasComponents = staticCompositionLocalOf<AtlasComponents> {
-    error("AtlasComponents not provided")
+val LocalAtlasComponents = staticCompositionLocalOf<BaseAtlasComponents> {
+    BaseComponents
 }
 
 val LocalAtlasScreens = staticCompositionLocalOf<AtlasScreens> {

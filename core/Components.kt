@@ -204,6 +204,35 @@ open class AtlasComponents {
 }
 
 @Composable
+fun <T> AtlasDividedCard(
+    items: List<T>,
+    modifier: Modifier = Modifier,
+    style: CardStyle = CardStyle.Regular,
+    enabled: Boolean = true,
+    onClick: (() -> Unit)? = null,
+    contentPadding: PaddingValues = PaddingValues(0.dp),
+    row: @Composable (item: T) -> Unit
+) {
+    val c = LocalAtlasComponents.current
+    c.Card(
+        modifier = modifier,
+        style = style,
+        enabled = enabled,
+        onClick = onClick,
+        contentPadding = contentPadding
+    ) {
+        Column {
+            items.forEachIndexed { index, item ->
+                row(item)
+                if (index < items.lastIndex) {
+                    c.Divider()
+                }
+            }
+        }
+    }
+}
+
+@Composable
 fun AtlasThemeOptionCard(
     name: String,
     iconName: String? = null,
