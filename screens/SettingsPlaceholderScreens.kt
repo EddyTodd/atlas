@@ -33,15 +33,6 @@ internal fun HowToPlayScreen(
 )
 
 @Composable
-internal fun RemoveAdsScreen(
-    onBack: (() -> Unit)?
-) = SettingsPlaceholderScreen(
-    title = "Remove Ads",
-    description = "Purchase options and ad-free settings will be available here soon.",
-    onBack = onBack
-)
-
-@Composable
 internal fun MoreGamesScreen(
     onBack: (() -> Unit)?
 ) = SettingsPlaceholderScreen(
@@ -86,7 +77,7 @@ private fun SettingsPlaceholderScreen(
             ) {
                 c.Card {
                     c.Text("Coming Soon", AtlasTextStyle.CardTitle)
-                    c.Text(description, AtlasTextStyle.Caption)
+                    c.Text(description, AtlasTextStyle.Muted)
                 }
             }
         }

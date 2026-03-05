@@ -114,7 +114,7 @@ internal fun DefaultAboutScreen(
                     onClick = onOpenLicenses
                 )
 
-                c.Text(footer, AtlasTextStyle.Caption)
+                c.Text(footer, AtlasTextStyle.Muted)
             }
         }
     }

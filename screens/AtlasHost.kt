@@ -49,7 +49,7 @@ fun AtlasHost(
     statisticsScreen: @Composable (onBack: () -> Unit) -> Unit,
     achievementsScreen: @Composable (onBack: () -> Unit) -> Unit,
     languageScreen: @Composable (onBack: () -> Unit) -> Unit,
-    removeAdsScreen: @Composable (onBack: () -> Unit) -> Unit,
+    removeAdsScreen: (@Composable (onBack: () -> Unit) -> Unit)? = null,
     moreGamesScreen: @Composable (onBack: () -> Unit) -> Unit,
     termsScreen: (@Composable (onBack: () -> Unit) -> Unit)? = null,
     privacyScreen: (@Composable (onBack: () -> Unit) -> Unit)? = null,
@@ -144,7 +144,8 @@ fun AtlasHost(
 
             AtlasRoute.HowToPlay -> howToPlayScreen(onNavigateBack)
 
-            AtlasRoute.RemoveAds -> removeAdsScreen(onNavigateBack)
+            AtlasRoute.RemoveAds -> (removeAdsScreen
+                ?: { back -> RemoveAdsScreen(onBack = back) })(onNavigateBack)
 
             AtlasRoute.MoreGames -> moreGamesScreen(onNavigateBack)
 

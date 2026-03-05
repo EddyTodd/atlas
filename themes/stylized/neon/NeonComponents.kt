@@ -128,7 +128,6 @@ object NeonThemeComponents : BaseAtlasComponents() {
 
             AtlasTextStyle.CardSubtitle,
             AtlasTextStyle.Muted,
-            AtlasTextStyle.Caption,
             AtlasTextStyle.Overline -> NeonTokens.Cyan.copy(alpha = 0.7f)
         }
         val size = when (style) {
@@ -143,7 +142,6 @@ object NeonThemeComponents : BaseAtlasComponents() {
 
             AtlasTextStyle.Label -> ComponentTokens.LabelSize
             AtlasTextStyle.Muted -> ComponentTokens.MutedSize
-            AtlasTextStyle.Caption -> ComponentTokens.CaptionSize
             AtlasTextStyle.Overline -> ComponentTokens.OverlineSize
         }
         NeonText(

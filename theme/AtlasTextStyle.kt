@@ -11,6 +11,5 @@ enum class AtlasTextStyle {
     BodyStrong,
     Label,
     Muted,
-    Caption,
     Overline
 }

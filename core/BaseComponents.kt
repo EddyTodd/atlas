@@ -57,8 +57,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.CompositingStrategy
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -190,7 +190,6 @@ open class BaseAtlasComponents : AtlasComponents() {
             AtlasTextStyle.BodyStrong -> colors.text
             AtlasTextStyle.Label -> colors.text
             AtlasTextStyle.Muted -> colors.textMuted
-            AtlasTextStyle.Caption -> colors.textMuted
             AtlasTextStyle.Overline -> colors.textMuted
         }
         Text(
@@ -258,7 +257,13 @@ open class BaseAtlasComponents : AtlasComponents() {
                     enabled = enabled,
                     shape = shape,
                     contentPadding = buttonContentPaddingFor(variant, size),
-                    modifier = modifier.height(buttonHeight),
+                    modifier = modifier
+                        .height(buttonHeight)
+                        .shadow(
+                            elevation = BaseTokens.CardElevationRegular,
+                            shape = shape,
+                            clip = false
+                        ),
                     border = BorderStroke(BaseTokens.BorderWidth, colors.btnBorder),
                     colors = ButtonDefaults.outlinedButtonColors(
                         contentColor = colors.btnText,
@@ -361,7 +366,13 @@ open class BaseAtlasComponents : AtlasComponents() {
                     onClick = onClick,
                     enabled = enabled,
                     shape = RoundedCornerShape(BaseTokens.ButtonCornerRadiusCompact),
-                    modifier = modifier.size(iconButtonSize),
+                    modifier = modifier
+                        .size(iconButtonSize)
+                        .shadow(
+                            elevation = BaseTokens.CardElevationRegular,
+                            shape = RoundedCornerShape(BaseTokens.ButtonCornerRadiusCompact),
+                            clip = false
+                        ),
                     colors = IconButtonDefaults.filledIconButtonColors(
                         containerColor = colors.cardBg,
                         contentColor = colors.text,
@@ -434,7 +445,7 @@ open class BaseAtlasComponents : AtlasComponents() {
         val tappable = style == CardStyle.Tappable
 
         val container = if (active) {
-            colors.accent.copy(alpha = BaseTokens.ActiveCardAlpha)
+            colors.accent.copy(alpha = BaseTokens.ActiveCardAlpha).compositeOver(colors.cardBg)
         } else {
             colors.cardBg
         }
@@ -443,42 +454,71 @@ open class BaseAtlasComponents : AtlasComponents() {
                 BaseTokens.ActiveCardBorderWidth,
                 colors.accent.copy(alpha = BaseTokens.ActiveCardBorderAlpha)
             )
-        } else if (tappable) {
-            BorderStroke(BaseTokens.BorderWidth, colors.cardBg.tappableCardBorderColor())
         } else {
             null
         }
+        val cardModifier = modifier
+        val cardColors = CardDefaults.cardColors(
+            containerColor = container,
+            contentColor = colors.text,
+            disabledContainerColor = container,
+            disabledContentColor = colors.textMuted
+        )
+        val cardElevation = CardDefaults.cardElevation(
+            defaultElevation = if (active) {
+                BaseTokens.CardElevationActive
+            } else {
+                BaseTokens.CardElevationRegular
+            },
+            pressedElevation = if (active) {
+                BaseTokens.CardElevationActive + 1.dp
+            } else {
+                BaseTokens.CardElevationRegular + 1.dp
+            },
+            focusedElevation = if (active) {
+                BaseTokens.CardElevationActive
+            } else {
+                BaseTokens.CardElevationRegular
+            },
+            hoveredElevation = if (active) {
+                BaseTokens.CardElevationActive
+            } else {
+                BaseTokens.CardElevationRegular
+            },
+            draggedElevation = if (active) {
+                BaseTokens.CardElevationActive + 1.dp
+            } else {
+                BaseTokens.CardElevationRegular + 1.dp
+            },
+            disabledElevation = if (active) {
+                BaseTokens.CardElevationActive
+            } else {
+                BaseTokens.CardElevationRegular
+            }
+        )
+        val contentBox: @Composable () -> Unit = {
+            Box(modifier = Modifier.padding(contentPadding)) { content() }
+        }
+
         if (tappable) {
             Card(
                 onClick = onClick ?: {},
                 enabled = enabled,
                 interactionSource = remember { MutableInteractionSource() },
-                modifier = modifier,
+                modifier = cardModifier,
                 shape = cardShape,
-                colors = CardDefaults.cardColors(
-                    containerColor = container,
-                    contentColor = colors.text,
-                    disabledContainerColor = container,
-                    disabledContentColor = colors.textMuted
-                ),
+                colors = cardColors,
+                elevation = cardElevation,
                 border = border
-            ) {
-                Box(modifier = Modifier.padding(contentPadding)) { content() }
-            }
+            ) { contentBox() }
         } else {
             Card(
-                modifier = modifier,
+                modifier = cardModifier,
                 shape = cardShape,
-                colors = CardDefaults.cardColors(
-                    containerColor = container,
-                    contentColor = colors.text,
-                    disabledContainerColor = container,
-                    disabledContentColor = colors.textMuted
-                ),
+                colors = cardColors,
+                elevation = cardElevation,
                 border = border
-            ) {
-                Box(modifier = Modifier.padding(contentPadding)) { content() }
-            }
+            ) { contentBox() }
         }
     }
 
@@ -861,6 +901,7 @@ open class BaseAtlasComponents : AtlasComponents() {
             paint.maskFilter = null
         }
     }
+
 }
 
 @Stable
@@ -889,12 +930,3 @@ fun Modifier.fadeTopEdge(
 }
 
 object BaseComponents : BaseAtlasComponents()
-
-private const val TAPPABLE_CARD_BORDER_ALPHA = 0.05f
-
-private fun Color.tappableCardBorderColor(): Color =
-    if (luminance() > 0.5f) {
-        Color.Black.copy(alpha = TAPPABLE_CARD_BORDER_ALPHA)
-    } else {
-        Color.White.copy(alpha = TAPPABLE_CARD_BORDER_ALPHA)
-    }

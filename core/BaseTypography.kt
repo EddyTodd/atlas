@@ -144,12 +144,6 @@ object BaseTypography : AtlasTypography() {
             fontWeight = FontWeight.W400
         )
 
-        AtlasTextStyle.Caption -> TextStyle(
-            fontFamily = DefaultBodyFontFamily,
-            fontSize = ComponentTokens.CaptionSize,
-            fontWeight = FontWeight.W400
-        )
-
         AtlasTextStyle.Overline -> TextStyle(
             fontFamily = DefaultBodyFontFamily,
             fontSize = ComponentTokens.OverlineSize,

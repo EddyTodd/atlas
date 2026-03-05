@@ -264,7 +264,7 @@ fun AtlasThemeOptionCard(
                     modifier = Modifier.size(24.dp)
                 )
             } else {
-                c.Text(name, AtlasTextStyle.Caption)
+                c.Text(name, AtlasTextStyle.Muted)
             }
         }
     }

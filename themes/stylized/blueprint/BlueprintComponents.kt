@@ -117,7 +117,6 @@ object BlueprintThemeComponents : BaseAtlasComponents() {
         val color = when (style) {
             AtlasTextStyle.Subtitle -> colors.accent
             AtlasTextStyle.Muted,
-            AtlasTextStyle.Caption,
             AtlasTextStyle.CardSubtitle,
             AtlasTextStyle.Overline -> colors.textMuted
 
@@ -528,9 +527,8 @@ object BlueprintThemeComponents : BaseAtlasComponents() {
             )
 
             AtlasTextStyle.CardSubtitle,
-            AtlasTextStyle.Caption,
             AtlasTextStyle.Overline -> TextStyle(
-                fontSize = ComponentTokens.CaptionSize,
+                fontSize = ComponentTokens.MutedSize,
                 fontWeight = FontWeight.Medium,
                 fontFamily = BlueprintFontFamily
             )

@@ -119,7 +119,6 @@ object RetroThemeComponents : BaseAtlasComponents() {
         val color = when (style) {
             AtlasTextStyle.Subtitle -> colors.accent
             AtlasTextStyle.Muted,
-            AtlasTextStyle.Caption,
             AtlasTextStyle.CardSubtitle,
             AtlasTextStyle.Overline -> colors.textMuted
 
@@ -604,9 +603,9 @@ object RetroThemeComponents : BaseAtlasComponents() {
             )
 
             AtlasTextStyle.CardSubtitle,
-            AtlasTextStyle.Caption,
+            AtlasTextStyle.Muted,
             AtlasTextStyle.Overline -> TextStyle(
-                fontSize = ComponentTokens.CaptionSize,
+                fontSize = ComponentTokens.MutedSize,
                 fontWeight = FontWeight.Normal,
                 fontFamily = retroFontFamily
             )

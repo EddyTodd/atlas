@@ -68,6 +68,8 @@ internal object BaseTokens {
     const val AlertShadowAlpha = 0.2f
 
     // Shadow
+    val CardElevationRegular = 2.dp
+    val CardElevationActive = 3.dp
     val PrimaryShadowElevation = 8.dp
     val PrimaryShadowYOffset = 2.dp
     val IconPrimaryShadowElevation = 10.dp
@@ -98,7 +100,6 @@ object ComponentTokens {
     val BodyLineHeight = 22.5.sp
     val LabelSize = 13.sp
     val MutedSize = 14.sp
-    val CaptionSize = 12.sp
     val OverlineSize = 11.sp
 
     val DialogTitleSize = 22.sp
