@@ -114,7 +114,7 @@ internal fun DefaultAboutScreen(
                     onClick = onOpenLicenses
                 )
 
-                c.Text(footer, AtlasTextStyle.Muted)
+                c.Text(footer, AtlasTextStyle.Caption)
             }
         }
     }
@@ -129,7 +129,7 @@ private fun AboutRow(label: String, value: String) {
             .padding(vertical = 12.dp, horizontal = 16.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        c.Text(label, AtlasTextStyle.Muted)
+        c.Text(label, AtlasTextStyle.Caption)
         c.Text(value, AtlasTextStyle.CardTitle)
     }
 }
@@ -154,7 +154,7 @@ private fun LinkCard(
             Icon(
                 imageVector = atlasIcon(IconRole.ChevronRight),
                 contentDescription = null,
-                tint = colors.textMuted,
+                tint = colors.textCaption,
                 modifier = Modifier.size(20.dp)
             )
         }

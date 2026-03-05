@@ -132,7 +132,7 @@ private fun AchievementCardItem(
                     verticalArrangement = Arrangement.spacedBy(2.dp)
                 ) {
                     c.Text(achievement.name, AtlasTextStyle.CardTitle)
-                    c.Text(achievement.description, AtlasTextStyle.Muted)
+                    c.Text(achievement.description, AtlasTextStyle.Caption)
                 }
 
                 when {
@@ -145,11 +145,11 @@ private fun AchievementCardItem(
                     }
 
                     shouldShowProgress -> {
-                        c.Text("$clampedProgress/$progressGoal", AtlasTextStyle.Muted)
+                        c.Text("$clampedProgress/$progressGoal", AtlasTextStyle.Caption)
                     }
 
                     !achievement.status.isNullOrBlank() -> {
-                        c.Text(achievement.status, AtlasTextStyle.Muted)
+                        c.Text(achievement.status, AtlasTextStyle.Caption)
                     }
                 }
             }

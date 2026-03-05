@@ -137,9 +137,9 @@ object BaseTypography : AtlasTypography() {
             letterSpacing = BaseTokens.SubtitleLetterSpacing
         )
 
-        AtlasTextStyle.Muted -> TextStyle(
+        AtlasTextStyle.Caption -> TextStyle(
             fontFamily = DefaultBodyFontFamily,
-            fontSize = ComponentTokens.MutedSize,
+            fontSize = ComponentTokens.CaptionSize,
             lineHeight = ComponentTokens.BodyLineHeight,
             fontWeight = FontWeight.W400
         )
@@ -175,7 +175,7 @@ object BaseTypography : AtlasTypography() {
             )
 
             ButtonVariant.Text,
-            ButtonVariant.TextMuted -> TextStyle(
+            ButtonVariant.TextCaption -> TextStyle(
                 fontFamily = DefaultBodyFontFamily,
                 fontSize = ComponentTokens.TextButtonLabelSize,
                 fontWeight = FontWeight.W500,

@@ -10,6 +10,6 @@ enum class AtlasTextStyle {
     Body,
     BodyStrong,
     Label,
-    Muted,
+    Caption,
     Overline
 }

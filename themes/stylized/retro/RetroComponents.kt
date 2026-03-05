@@ -118,9 +118,9 @@ object RetroThemeComponents : BaseAtlasComponents() {
         val colors = LocalColors.current
         val color = when (style) {
             AtlasTextStyle.Subtitle -> colors.accent
-            AtlasTextStyle.Muted,
+            AtlasTextStyle.Caption,
             AtlasTextStyle.CardSubtitle,
-            AtlasTextStyle.Overline -> colors.textMuted
+            AtlasTextStyle.Overline -> colors.textCaption
 
             else -> colors.text
         }
@@ -148,18 +148,18 @@ object RetroThemeComponents : BaseAtlasComponents() {
             ButtonVariant.Secondary -> null
             ButtonVariant.Outline -> if (enabled) colors.accent else null
             ButtonVariant.Text,
-            ButtonVariant.TextMuted -> null
+            ButtonVariant.TextCaption -> null
         }
         val bevelSize = when (variant) {
             ButtonVariant.Primary -> if (enabled) RetroTokens.PrimaryBevelSize else RetroTokens.BevelSize
             ButtonVariant.Secondary,
             ButtonVariant.Outline,
             ButtonVariant.Text,
-            ButtonVariant.TextMuted -> RetroTokens.BevelSize
+            ButtonVariant.TextCaption -> RetroTokens.BevelSize
         }
         val labelStyle = buttonTextStyleFor(size)
         val baseColor =
-            if (variant == ButtonVariant.Text || variant == ButtonVariant.TextMuted) colors.bg else colors.cardBg
+            if (variant == ButtonVariant.Text || variant == ButtonVariant.TextCaption) colors.bg else colors.cardBg
         val textModifier = if (variant == ButtonVariant.Primary) {
             Modifier.padding(horizontal = primaryButtonTextPadding(size))
         } else {
@@ -496,7 +496,7 @@ object RetroThemeComponents : BaseAtlasComponents() {
                 null
             },
             title = { Text(title, color = colors.text) },
-            text = { Text(text, color = colors.textMuted) },
+            text = { Text(text, color = colors.textCaption) },
             containerColor = colors.secondaryCardBg
         )
     }
@@ -603,15 +603,15 @@ object RetroThemeComponents : BaseAtlasComponents() {
             )
 
             AtlasTextStyle.CardSubtitle,
-            AtlasTextStyle.Muted,
+            AtlasTextStyle.Caption,
             AtlasTextStyle.Overline -> TextStyle(
-                fontSize = ComponentTokens.MutedSize,
+                fontSize = ComponentTokens.CaptionSize,
                 fontWeight = FontWeight.Normal,
                 fontFamily = retroFontFamily
             )
 
             AtlasTextStyle.Body,
-            AtlasTextStyle.Muted -> TextStyle(
+            AtlasTextStyle.Caption -> TextStyle(
                 fontSize = ComponentTokens.BodySize,
                 fontWeight = FontWeight.Normal,
                 fontFamily = retroFontFamily

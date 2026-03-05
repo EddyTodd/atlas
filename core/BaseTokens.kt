@@ -99,7 +99,7 @@ object ComponentTokens {
     val BodySize = 14.sp
     val BodyLineHeight = 22.5.sp
     val LabelSize = 13.sp
-    val MutedSize = 14.sp
+    val CaptionSize = 14.sp
     val OverlineSize = 11.sp
 
     val DialogTitleSize = 22.sp

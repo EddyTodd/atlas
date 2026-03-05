@@ -116,9 +116,9 @@ object BlueprintThemeComponents : BaseAtlasComponents() {
         val colors = LocalColors.current
         val color = when (style) {
             AtlasTextStyle.Subtitle -> colors.accent
-            AtlasTextStyle.Muted,
+            AtlasTextStyle.Caption,
             AtlasTextStyle.CardSubtitle,
-            AtlasTextStyle.Overline -> colors.textMuted
+            AtlasTextStyle.Overline -> colors.textCaption
 
             else -> colors.text
         }
@@ -186,7 +186,7 @@ object BlueprintThemeComponents : BaseAtlasComponents() {
             }
 
             ButtonVariant.Text,
-            ButtonVariant.TextMuted -> {
+            ButtonVariant.TextCaption -> {
                 TextButton(
                     onClick = onClick,
                     enabled = enabled,
@@ -400,7 +400,7 @@ object BlueprintThemeComponents : BaseAtlasComponents() {
                 null
             },
             title = { Text(title, color = colors.text) },
-            text = { Text(text, color = colors.textMuted) },
+            text = { Text(text, color = colors.textCaption) },
             containerColor = colors.cardBg
         )
     }
@@ -520,15 +520,15 @@ object BlueprintThemeComponents : BaseAtlasComponents() {
                 fontFamily = BlueprintFontFamily
             )
 
-            AtlasTextStyle.Muted -> TextStyle(
-                fontSize = ComponentTokens.MutedSize,
+            AtlasTextStyle.Caption -> TextStyle(
+                fontSize = ComponentTokens.CaptionSize,
                 fontWeight = FontWeight.Medium,
                 fontFamily = BlueprintFontFamily
             )
 
             AtlasTextStyle.CardSubtitle,
             AtlasTextStyle.Overline -> TextStyle(
-                fontSize = ComponentTokens.MutedSize,
+                fontSize = ComponentTokens.CaptionSize,
                 fontWeight = FontWeight.Medium,
                 fontFamily = BlueprintFontFamily
             )

@@ -76,7 +76,7 @@ internal fun LicensesScreen(
             ) {
                 c.Text(
                     "Open source software used by this app:",
-                    AtlasTextStyle.Muted
+                    AtlasTextStyle.Caption
                 )
 
                 c.Card {

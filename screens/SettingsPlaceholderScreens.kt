@@ -77,7 +77,7 @@ private fun SettingsPlaceholderScreen(
             ) {
                 c.Card {
                     c.Text("Coming Soon", AtlasTextStyle.CardTitle)
-                    c.Text(description, AtlasTextStyle.Muted)
+                    c.Text(description, AtlasTextStyle.Caption)
                 }
             }
         }

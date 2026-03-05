@@ -18,18 +18,18 @@ private fun colorsFromPalette(
     errorFg: Color? = null
 ): Colors {
     val text = onBackground ?: primary
-    val muted = accent ?: text.copy(alpha = if (isDark) 0.7f else 0.65f)
+    val caption = accent ?: text.copy(alpha = if (isDark) 0.7f else 0.65f)
     val border = text.copy(alpha = if (isDark) 0.1f else 0.12f)
     return Colors(
         name = name,
         primary = primary,
-        accent = muted,
+        accent = caption,
         bg = background,
         cardBg = islands,
         secondaryCardBg = boardBackground,
         cellEmpty = boardBackground,
         text = text,
-        textMuted = muted,
+        textCaption = caption,
         badge = primary,
         badgeText = onPrimary ?: background,
         errorBg = errorBg ?: mineBackground,
@@ -37,7 +37,7 @@ private fun colorsFromPalette(
         btnBorder = border,
         btnText = text,
         dotInactive = border,
-        dotActive = muted
+        dotActive = caption
     )
 }
 
@@ -51,7 +51,7 @@ object ModeColors {
         secondaryCardBg = ModeColorTokens.Light.SecondaryCardBackground,
         cellEmpty = ModeColorTokens.Light.CellEmpty,
         text = ModeColorTokens.Light.Text,
-        textMuted = ModeColorTokens.Light.TextMuted,
+        textCaption = ModeColorTokens.Light.TextCaption,
         badge = ModeColorTokens.Light.Badge,
         badgeText = ModeColorTokens.Light.BadgeText,
         errorBg = ModeColorTokens.Light.ErrorBackground,
@@ -71,7 +71,7 @@ object ModeColors {
         secondaryCardBg = ModeColorTokens.Dark.SecondaryCardBackground,
         cellEmpty = ModeColorTokens.Dark.CellEmpty,
         text = ModeColorTokens.Dark.Text,
-        textMuted = ModeColorTokens.Dark.TextMuted,
+        textCaption = ModeColorTokens.Dark.TextCaption,
         badge = ModeColorTokens.Dark.Badge,
         badgeText = ModeColorTokens.Dark.BadgeText,
         errorBg = ModeColorTokens.Dark.ErrorBackground,
@@ -96,7 +96,7 @@ private object ModeColorTokens {
         val SecondaryCardBackground = Color(0xFFECF0F4)
         val CellEmpty = Color(0xFFECF0F4)
         val Text = Color(0xFF1C2433)
-        val TextMuted = Color(0xFF7888A0)
+        val TextCaption = Color(0xFF7888A0)
         val Badge = Color(0xFF1C2433)
         val BadgeText = Color(0xFFF4F6F9)
         val ErrorBackground = Color(0xFFCC5B48)
@@ -115,7 +115,7 @@ private object ModeColorTokens {
         val SecondaryCardBackground = Color(0xFF252529)
         val CellEmpty = Color(0xFF252529)
         val Text = Color(0xFFE8E6E2)
-        val TextMuted = Color(0xFF7A787A)
+        val TextCaption = Color(0xFF7A787A)
         val Badge = Color(0xFFE8E6E2)
         val BadgeText = Color(0xFF1E1E22)
         val ErrorBackground = Color(0xFFC4423A)
@@ -210,7 +210,7 @@ internal object PaletteColors {
         secondaryCardBg = Color(0xFFE8E4DD),
         cellEmpty = Color(0xFFD9D4CC),
         text = Color(0xFF1A1A1A),
-        textMuted = Color(0xFF8A8580),
+        textCaption = Color(0xFF8A8580),
         badge = Color(0xFFC4523B),
         badgeText = Color(0xFFFFFFFF),
         errorBg = Color(0xFFC4523B),

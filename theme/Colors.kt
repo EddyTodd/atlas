@@ -13,7 +13,7 @@ data class Colors(
     val secondaryCardBg: Color,
     val cellEmpty: Color,
     val text: Color,
-    val textMuted: Color,
+    val textCaption: Color,
     val badge: Color,
     val badgeText: Color,
     val errorBg: Color,

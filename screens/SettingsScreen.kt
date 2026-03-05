@@ -113,7 +113,7 @@ internal fun SettingsScreen() {
                                 Icon(
                                     imageVector = atlasIcon(IconRole.ChevronRight),
                                     contentDescription = null,
-                                    tint = colors.textMuted,
+                                    tint = colors.textCaption,
                                     modifier = Modifier.size(20.dp)
                                 )
                             }

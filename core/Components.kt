@@ -30,7 +30,7 @@ enum class ButtonVariant {
     Secondary,
     Outline,
     Text,
-    TextMuted
+    TextCaption
 }
 
 enum class ButtonSize {
@@ -260,11 +260,11 @@ fun AtlasThemeOptionCard(
                 Icon(
                     painter = painterResource(iconRes),
                     contentDescription = name,
-                    tint = if (isActive) colors.primary else colors.textMuted,
+                    tint = if (isActive) colors.primary else colors.textCaption,
                     modifier = Modifier.size(24.dp)
                 )
             } else {
-                c.Text(name, AtlasTextStyle.Muted)
+                c.Text(name, AtlasTextStyle.Caption)
             }
         }
     }

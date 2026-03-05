@@ -106,8 +106,8 @@ internal fun RemoveAdsScreen(
                     )
                     Text(
                         text = "Enjoy an uninterrupted minesweeper experience with a one-time purchase",
-                        style = typography.textStyle(AtlasTextStyle.Muted),
-                        color = colors.textMuted,
+                        style = typography.textStyle(AtlasTextStyle.Caption),
+                        color = colors.textCaption,
                         textAlign = TextAlign.Center
                     )
                 }
@@ -141,8 +141,8 @@ internal fun RemoveAdsScreen(
                                 )
                                 Text(
                                     text = feature.description,
-                                    style = typography.textStyle(AtlasTextStyle.Muted),
-                                    color = colors.textMuted
+                                    style = typography.textStyle(AtlasTextStyle.Caption),
+                                    color = colors.textCaption
                                 )
                             }
                         }
@@ -190,8 +190,8 @@ internal fun RemoveAdsScreen(
                         )
                         Text(
                             text = "One-time purchase - Forever",
-                            style = typography.textStyle(AtlasTextStyle.Muted),
-                            color = colors.textMuted,
+                            style = typography.textStyle(AtlasTextStyle.Caption),
+                            color = colors.textCaption,
                             textAlign = TextAlign.Center
                         )
                     }
@@ -216,7 +216,7 @@ internal fun RemoveAdsScreen(
                 Text(
                     text = "Payment will be charged at confirmation of purchase. This is a one-time, non-recurring charge.",
                     style = typography.textStyle(AtlasTextStyle.Overline),
-                    color = colors.textMuted,
+                    color = colors.textCaption,
                     textAlign = TextAlign.Center,
                     modifier = Modifier
                         .fillMaxWidth()

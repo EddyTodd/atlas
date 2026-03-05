@@ -48,7 +48,7 @@ internal fun StatisticsScreen(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
-                            c.Text(stat.label, AtlasTextStyle.Muted)
+                            c.Text(stat.label, AtlasTextStyle.Caption)
                             c.Text(stat.value, AtlasTextStyle.CardTitle)
                         }
                     }

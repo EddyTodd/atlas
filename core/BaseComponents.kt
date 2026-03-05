@@ -158,7 +158,7 @@ open class BaseAtlasComponents : AtlasComponents() {
                     selected = index == clampedIndex,
                     onClick = { onSelect(index) },
                     selectedContentColor = colors.text,
-                    unselectedContentColor = colors.textMuted,
+                    unselectedContentColor = colors.textCaption,
                     text = {
                         Text(
                             text = label,
@@ -185,12 +185,12 @@ open class BaseAtlasComponents : AtlasComponents() {
             AtlasTextStyle.Subtitle -> colors.accent
             AtlasTextStyle.SectionTitle -> colors.text
             AtlasTextStyle.CardTitle -> colors.text
-            AtlasTextStyle.CardSubtitle -> colors.textMuted
+            AtlasTextStyle.CardSubtitle -> colors.textCaption
             AtlasTextStyle.Body -> colors.text
             AtlasTextStyle.BodyStrong -> colors.text
             AtlasTextStyle.Label -> colors.text
-            AtlasTextStyle.Muted -> colors.textMuted
-            AtlasTextStyle.Overline -> colors.textMuted
+            AtlasTextStyle.Caption -> colors.textCaption
+            AtlasTextStyle.Overline -> colors.textCaption
         }
         Text(
             text = resolvedText,
@@ -292,9 +292,9 @@ open class BaseAtlasComponents : AtlasComponents() {
             }
 
             ButtonVariant.Text,
-            ButtonVariant.TextMuted -> {
+            ButtonVariant.TextCaption -> {
                 val textColor =
-                    if (variant == ButtonVariant.Text) colors.accent else colors.textMuted
+                    if (variant == ButtonVariant.Text) colors.accent else colors.textCaption
                 TextButton(
                     onClick = onClick,
                     enabled = enabled,
@@ -462,7 +462,7 @@ open class BaseAtlasComponents : AtlasComponents() {
             containerColor = container,
             contentColor = colors.text,
             disabledContainerColor = container,
-            disabledContentColor = colors.textMuted
+            disabledContentColor = colors.textCaption
         )
         val cardElevation = CardDefaults.cardElevation(
             defaultElevation = if (active) {
@@ -731,7 +731,7 @@ open class BaseAtlasComponents : AtlasComponents() {
                             text = text,
                             modifier = Modifier.padding(top = 6.dp, bottom = 24.dp),
                             style = typography.dialogBodyStyle(),
-                            color = colors.textMuted,
+                            color = colors.textCaption,
                             textAlign = TextAlign.Center
                         )
                         Row(

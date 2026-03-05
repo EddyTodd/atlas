@@ -294,7 +294,7 @@ private fun HighContrastCard(
             Icon(
                 imageVector = atlasIcon(IconRole.Settings),
                 contentDescription = null,
-                tint = colors.textMuted
+                tint = colors.textCaption
             )
             c.Text("High Contrast", AtlasTextStyle.CardTitle)
             Spacer(modifier = Modifier.weight(1f))

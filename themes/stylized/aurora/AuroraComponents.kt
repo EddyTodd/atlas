@@ -114,15 +114,15 @@ object AuroraThemeComponents : BaseAtlasComponents() {
                 ) { textLabel() }
             }
 
-            ButtonVariant.TextMuted -> {
+            ButtonVariant.TextCaption -> {
                 TextButton(
                     onClick = onClick,
                     enabled = enabled,
                     modifier = modifier.height(height),
                     contentPadding = ComponentTokens.ButtonContentPadding,
                     colors = ButtonDefaults.textButtonColors(
-                        contentColor = colors.textMuted,
-                        disabledContentColor = colors.textMuted.copy(alpha = 0.45f)
+                        contentColor = colors.textCaption,
+                        disabledContentColor = colors.textCaption.copy(alpha = 0.45f)
                     )
                 ) { textLabel() }
             }

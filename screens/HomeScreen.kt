@@ -91,12 +91,12 @@ internal fun HomeScreen(
                             ) {
                                 Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                                     c.Text("Continue", AtlasTextStyle.CardTitle)
-                                    c.Text(continueDescription, AtlasTextStyle.Muted)
+                                    c.Text(continueDescription, AtlasTextStyle.Caption)
                                 }
                                 Icon(
                                     imageVector = atlasIcon(IconRole.ChevronRight),
                                     contentDescription = null,
-                                    tint = colors.textMuted,
+                                    tint = colors.textCaption,
                                     modifier = Modifier.size(20.dp)
                                 )
                             }
