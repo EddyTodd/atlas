@@ -16,18 +16,7 @@ internal object BaseTokens {
     val TopBarHeight = 80.dp
 
     // Buttons / icon buttons
-    val ButtonRegularHorizontalPadding = 32.dp
-    val ButtonRegularVerticalPadding = 16.dp
-    val ButtonCompactHorizontalPadding = 16.dp
-    val ButtonCompactVerticalPadding = 10.dp
-    val TextButtonHorizontalPadding = 16.dp
-    val TextButtonVerticalPadding = 10.dp
-    val IconButtonSize = 48.dp
-    val IconButtonCompactSize = 36.dp
     val IconPrimarySize = 28.dp
-    val IconSecondarySize = 24.dp
-    val IconOutlinedSize = 24.dp
-    val IconColoredSize = 24.dp
     val IconCompactSize = 20.dp
 
     // Typography
@@ -53,8 +42,6 @@ internal object BaseTokens {
 
     // Disabled/alpha values
     const val PrimaryShadowAlpha = 0.16f
-    const val SecondaryPressedAlpha = 0.95f
-    const val TextPressedAlpha = 0.7f
     const val DisabledPrimaryContainerAlpha = 0.35f
     const val DisabledPrimaryContentAlpha = 0.6f
     const val DisabledSecondaryContentAlpha = 0.5f
@@ -68,8 +55,7 @@ internal object BaseTokens {
     const val AlertShadowAlpha = 0.2f
 
     // Shadow
-    val CardElevationRegular = 2.dp
-    val CardElevationActive = 3.dp
+    val CardElevation = 4.dp
     val PrimaryShadowElevation = 8.dp
     val PrimaryShadowYOffset = 2.dp
     val IconPrimaryShadowElevation = 10.dp
@@ -95,7 +81,6 @@ object ComponentTokens {
     val SectionTitleSize = 20.sp
     val CardTitleSize = 14.sp
     val CardSubtitleSize = 12.sp
-    val CardBodySize = 12.sp
     val BodySize = 14.sp
     val BodyLineHeight = 22.5.sp
     val LabelSize = 13.sp

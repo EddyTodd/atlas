@@ -4,6 +4,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowLeft
 import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Replay
+import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
 
@@ -16,6 +17,7 @@ object DefaultAtlasIcons : AtlasIconSet {
         IconRole.Back -> Icons.AutoMirrored.Rounded.KeyboardArrowLeft
         IconRole.Settings -> Icons.Rounded.Settings
         IconRole.ChevronRight -> Icons.AutoMirrored.Rounded.KeyboardArrowRight
+        IconRole.Check -> Icons.Rounded.Check
         IconRole.Replay -> Icons.Filled.Replay
     }
 }

@@ -260,7 +260,7 @@ open class BaseAtlasComponents : AtlasComponents() {
                     modifier = modifier
                         .height(buttonHeight)
                         .shadow(
-                            elevation = BaseTokens.CardElevationRegular,
+                            elevation = BaseTokens.CardElevation,
                             shape = shape,
                             clip = false
                         ),
@@ -369,7 +369,7 @@ open class BaseAtlasComponents : AtlasComponents() {
                     modifier = modifier
                         .size(iconButtonSize)
                         .shadow(
-                            elevation = BaseTokens.CardElevationRegular,
+                            elevation = BaseTokens.CardElevation,
                             shape = RoundedCornerShape(BaseTokens.ButtonCornerRadiusCompact),
                             clip = false
                         ),
@@ -465,36 +465,12 @@ open class BaseAtlasComponents : AtlasComponents() {
             disabledContentColor = colors.textCaption
         )
         val cardElevation = CardDefaults.cardElevation(
-            defaultElevation = if (active) {
-                BaseTokens.CardElevationActive
-            } else {
-                BaseTokens.CardElevationRegular
-            },
-            pressedElevation = if (active) {
-                BaseTokens.CardElevationActive + 1.dp
-            } else {
-                BaseTokens.CardElevationRegular + 1.dp
-            },
-            focusedElevation = if (active) {
-                BaseTokens.CardElevationActive
-            } else {
-                BaseTokens.CardElevationRegular
-            },
-            hoveredElevation = if (active) {
-                BaseTokens.CardElevationActive
-            } else {
-                BaseTokens.CardElevationRegular
-            },
-            draggedElevation = if (active) {
-                BaseTokens.CardElevationActive + 1.dp
-            } else {
-                BaseTokens.CardElevationRegular + 1.dp
-            },
-            disabledElevation = if (active) {
-                BaseTokens.CardElevationActive
-            } else {
-                BaseTokens.CardElevationRegular
-            }
+            defaultElevation = BaseTokens.CardElevation,
+            pressedElevation = BaseTokens.CardElevation,
+            focusedElevation = BaseTokens.CardElevation,
+            hoveredElevation = BaseTokens.CardElevation,
+            draggedElevation = BaseTokens.CardElevation,
+            disabledElevation = BaseTokens.CardElevation,
         )
         val contentBox: @Composable () -> Unit = {
             Box(modifier = Modifier.padding(contentPadding)) { content() }
