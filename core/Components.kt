@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.ynmidk.atlas.theme.AtlasTextStyle
@@ -222,12 +223,14 @@ open class AtlasComponents {
             expanded = expanded,
             onDismissRequest = onDismiss,
             modifier = modifier,
+            offset = DpOffset(x = 0.dp, y = (-8).dp),
             containerColor = Color.Transparent,
             tonalElevation = 0.dp,
             shadowElevation = 0.dp
         ) {
             Box(
                 modifier = Modifier.padding(
+                    top = 4.dp,
                     start = 6.dp,
                     end = 6.dp,
                     bottom = 6.dp
