@@ -443,6 +443,7 @@ open class BaseAtlasComponents : AtlasComponents() {
         val colors = LocalColors.current
         val active = style == CardStyle.Active
         val tappable = style == CardStyle.Tappable
+        val interactive = tappable || onClick != null
 
         val container = if (active) {
             colors.accent.copy(alpha = BaseTokens.ActiveCardAlpha).compositeOver(colors.cardBg)
@@ -476,7 +477,7 @@ open class BaseAtlasComponents : AtlasComponents() {
             Box(modifier = Modifier.padding(contentPadding)) { content() }
         }
 
-        if (tappable) {
+        if (interactive) {
             Card(
                 onClick = onClick ?: {},
                 enabled = enabled,

@@ -1,6 +1,7 @@
 package com.ynmidk.atlas.core
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -12,6 +13,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.background
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.Icon
@@ -26,6 +29,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.ynmidk.atlas.theme.AtlasTextStyle
+import com.ynmidk.atlas.theme.LocalAtlasTypography
 import com.ynmidk.atlas.theme.LocalAtlasComponents
 import com.ynmidk.atlas.theme.LocalColors
 import androidx.compose.material3.Slider as MaterialSlider
@@ -117,6 +121,32 @@ open class AtlasComponents {
         notImplemented("IconButton")
     }
 
+    @Composable
+    open fun InfoButton(
+        onClick: () -> Unit,
+        modifier: Modifier = Modifier,
+        label: String = "i"
+    ) {
+        val colors = LocalColors.current
+        val typography = LocalAtlasTypography.current
+        Box(
+            modifier = modifier
+                .size(18.dp)
+                .background(
+                    color = colors.btnBorder.copy(alpha = 0.25f),
+                    shape = CircleShape
+                )
+                .clickable(onClick = onClick),
+            contentAlignment = Alignment.Center
+        ) {
+            androidx.compose.material3.Text(
+                text = label,
+                color = Color.White,
+                style = typography.textStyle(AtlasTextStyle.Overline)
+            )
+        }
+    }
+
     /* ──────────────── Containers / Controls ──────────────── */
 
     @Composable
@@ -191,13 +221,24 @@ open class AtlasComponents {
         DropdownMenu(
             expanded = expanded,
             onDismissRequest = onDismiss,
-            modifier = modifier
+            modifier = modifier,
+            containerColor = Color.Transparent,
+            tonalElevation = 0.dp,
+            shadowElevation = 0.dp
         ) {
-            Card(
-                modifier = Modifier.widthIn(max = 280.dp),
-                contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp)
+            Box(
+                modifier = Modifier.padding(
+                    start = 6.dp,
+                    end = 6.dp,
+                    bottom = 6.dp
+                )
             ) {
-                Text(text, AtlasTextStyle.Caption)
+                Card(
+                    modifier = Modifier.widthIn(max = 280.dp),
+                    contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp)
+                ) {
+                    Text(text, AtlasTextStyle.Caption)
+                }
             }
         }
     }
@@ -300,6 +341,19 @@ fun AtlasTooltip(
         expanded = expanded,
         onDismiss = onDismiss,
         modifier = modifier
+    )
+}
+
+@Composable
+fun AtlasInfoButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    label: String = "i"
+) {
+    LocalAtlasComponents.current.InfoButton(
+        onClick = onClick,
+        modifier = modifier,
+        label = label
     )
 }
 
