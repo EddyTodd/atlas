@@ -83,7 +83,7 @@ object BaseTypography : AtlasTypography() {
             fontFamily = DefaultTitleFontFamily,
             fontSize = ComponentTokens.TitleSize,
             lineHeight = BaseTokens.TitleLineHeight,
-            fontWeight = FontWeight.W700,
+            fontWeight = FontWeight.W800,
             letterSpacing = BaseTokens.TitleLetterSpacing
         )
 

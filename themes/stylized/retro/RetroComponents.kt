@@ -585,14 +585,19 @@ object RetroThemeComponents : BaseAtlasComponents() {
 
             AtlasTextStyle.Title -> TextStyle(
                 fontSize = ComponentTokens.TitleSize,
+                fontWeight = FontWeight.ExtraBold,
+                fontFamily = retroFontFamily
+            )
+
+            AtlasTextStyle.Subtitle -> TextStyle(
+                fontSize = ComponentTokens.SubtitleSize,
                 fontWeight = FontWeight.Bold,
                 fontFamily = retroFontFamily
             )
 
-            AtlasTextStyle.Subtitle,
             AtlasTextStyle.SectionTitle -> TextStyle(
                 fontSize = ComponentTokens.SubtitleSize,
-                fontWeight = FontWeight.Bold,
+                fontWeight = FontWeight.ExtraBold,
                 fontFamily = retroFontFamily
             )
 

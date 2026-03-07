@@ -490,7 +490,7 @@ object BlueprintThemeComponents : BaseAtlasComponents() {
 
             AtlasTextStyle.Title -> TextStyle(
                 fontSize = ComponentTokens.TitleSize,
-                fontWeight = FontWeight.Bold,
+                fontWeight = FontWeight.ExtraBold,
                 fontFamily = BlueprintFontFamily
             )
 
@@ -502,7 +502,7 @@ object BlueprintThemeComponents : BaseAtlasComponents() {
 
             AtlasTextStyle.SectionTitle -> TextStyle(
                 fontSize = ComponentTokens.SectionTitleSize,
-                fontWeight = FontWeight.Medium,
+                fontWeight = FontWeight.SemiBold,
                 fontFamily = BlueprintFontFamily
             )
 

@@ -157,7 +157,9 @@ private fun AchievementCardItem(
             if (shouldShowProgress) {
                 LinearProgressIndicator(
                     progress = { clampedProgress.toFloat() / progressGoal.toFloat() },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    color = colors.accent,
+                    trackColor = colors.secondaryCardBg
                 )
             }
         }

@@ -649,114 +649,14 @@ open class BaseAtlasComponents : AtlasComponents() {
         dismissLabel: String?,
         onConfirm: (() -> Unit)?
     ) {
-        val colors = LocalColors.current
-        val typography = LocalAtlasTypography.current
-        val confirmAction = onConfirm ?: onDismiss
-
-        Dialog(
-            onDismissRequest = onDismiss,
-            properties = DialogProperties(usePlatformDefaultWidth = false)
-        ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(
-                        horizontal = BaseTokens.AlertBackdropHorizontalPadding,
-                        vertical = BaseTokens.AlertBackdropVerticalPadding
-                    )
-                    .background(
-                        color = Color(0xFF1A1A1A).copy(alpha = BaseTokens.DialogBackdropAlpha),
-                        shape = RoundedCornerShape(BaseTokens.AlertBackdropCornerRadius)
-                    ),
-                contentAlignment = Alignment.Center
-            ) {
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .widthIn(max = BaseTokens.AlertMaxWidth)
-                        .graphicsLayer {
-                            shadowElevation = BaseTokens.AlertShadowElevation.toPx()
-                            shape = RoundedCornerShape(BaseTokens.AlertCornerRadius)
-                            clip = false
-                            ambientShadowColor =
-                                Color.Black.copy(alpha = BaseTokens.AlertShadowAlpha)
-                            spotShadowColor =
-                                Color.Black.copy(alpha = BaseTokens.AlertShadowAlpha)
-                        },
-                    shape = RoundedCornerShape(BaseTokens.AlertCornerRadius),
-                    colors = CardDefaults.cardColors(containerColor = colors.bg)
-                ) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(
-                                start = BaseTokens.AlertHorizontalPadding,
-                                end = BaseTokens.AlertHorizontalPadding,
-                                top = BaseTokens.AlertTopPadding,
-                                bottom = BaseTokens.AlertBottomPadding
-                            ),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(
-                            text = title,
-                            style = typography.dialogTitleStyle(),
-                            color = colors.text,
-                            textAlign = TextAlign.Center
-                        )
-                        Text(
-                            text = text,
-                            modifier = Modifier.padding(top = 6.dp, bottom = 24.dp),
-                            style = typography.dialogBodyStyle(),
-                            color = colors.textCaption,
-                            textAlign = TextAlign.Center
-                        )
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(BaseTokens.AlertActionSpacing)
-                        ) {
-                            if (dismissLabel != null) {
-                                OutlinedButton(
-                                    onClick = onDismiss,
-                                    shape = RoundedCornerShape(BaseTokens.ButtonCornerRadiusCompact),
-                                    modifier = Modifier
-                                        .weight(1f)
-                                        .height(BaseTokens.AlertActionHeight),
-                                    border = BorderStroke(
-                                        BaseTokens.BorderWidth,
-                                        colors.btnBorder
-                                    ),
-                                    colors = ButtonDefaults.outlinedButtonColors(contentColor = colors.text)
-                                ) {
-                                    Text(
-                                        text = dismissLabel,
-                                        style = typography.dialogButtonStyle()
-                                    )
-                                }
-                            }
-
-                            Button(
-                                onClick = confirmAction,
-                                shape = RoundedCornerShape(BaseTokens.ButtonCornerRadiusCompact),
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .height(BaseTokens.AlertActionHeight),
-                                colors = ButtonDefaults.buttonColors(
-                                    containerColor = colors.primary,
-                                    contentColor = Color.White
-                                )
-                            ) {
-                                Text(
-                                    text = confirmLabel,
-                                    style = typography.dialogButtonStyle().copy(
-                                        fontWeight = FontWeight.W600
-                                    )
-                                )
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        ConfirmDialog(
+            title = title,
+            text = text,
+            onDismiss = onDismiss,
+            confirmLabel = confirmLabel,
+            dismissLabel = dismissLabel,
+            onConfirm = onConfirm
+        )
     }
 
     @Composable

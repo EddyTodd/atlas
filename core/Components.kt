@@ -6,8 +6,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -20,6 +23,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import com.ynmidk.atlas.theme.AtlasTextStyle
 import com.ynmidk.atlas.theme.LocalAtlasComponents
 import com.ynmidk.atlas.theme.LocalColors
@@ -179,6 +183,58 @@ open class AtlasComponents {
     /* ──────────────── Dialogs ──────────────── */
 
     @Composable
+    open fun ConfirmDialog(
+        title: String,
+        text: String,
+        onDismiss: () -> Unit,
+        confirmLabel: String = "OK",
+        dismissLabel: String? = "Cancel",
+        onConfirm: (() -> Unit)? = null
+    ) {
+        val confirmAction = onConfirm ?: onDismiss
+        Dialog(onDismissRequest = onDismiss) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 24.dp)
+            ) {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .widthIn(max = 420.dp),
+                    contentPadding = PaddingValues(20.dp)
+                ) {
+                    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                        Text(title, AtlasTextStyle.CardTitle)
+                        Text(text, AtlasTextStyle.Body)
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            if (dismissLabel != null) {
+                                Button(
+                                    modifier = Modifier.weight(1f),
+                                    variant = ButtonVariant.Outline,
+                                    enabled = true,
+                                    onClick = onDismiss,
+                                    label = dismissLabel
+                                )
+                            }
+                            Button(
+                                modifier = Modifier.weight(1f),
+                                variant = ButtonVariant.Primary,
+                                enabled = true,
+                                onClick = confirmAction,
+                                label = confirmLabel
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @Composable
     open fun AlertDialog(
         title: String,
         text: String,
@@ -187,7 +243,14 @@ open class AtlasComponents {
         dismissLabel: String? = "Cancel",
         onConfirm: (() -> Unit)? = null
     ) {
-        notImplemented("AlertDialog")
+        ConfirmDialog(
+            title = title,
+            text = text,
+            onDismiss = onDismiss,
+            confirmLabel = confirmLabel,
+            dismissLabel = dismissLabel,
+            onConfirm = onConfirm
+        )
     }
 
     @Composable

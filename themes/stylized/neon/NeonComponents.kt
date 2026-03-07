@@ -149,18 +149,20 @@ object NeonThemeComponents : BaseAtlasComponents() {
             glowColor = glow,
             textColor = NeonTokens.White,
             fontSize = size,
-            fontWeight = if (
-                style == AtlasTextStyle.DisplayTitle ||
-                style == AtlasTextStyle.Title ||
-                style == AtlasTextStyle.Subtitle ||
-                style == AtlasTextStyle.SectionTitle ||
-                style == AtlasTextStyle.CardTitle ||
-                style == AtlasTextStyle.BodyStrong ||
-                style == AtlasTextStyle.Label
-            ) {
-                FontWeight.Bold
-            } else {
-                FontWeight.Medium
+            fontWeight = when (style) {
+                AtlasTextStyle.Title,
+                AtlasTextStyle.SectionTitle -> FontWeight.ExtraBold
+
+                AtlasTextStyle.DisplayTitle,
+                AtlasTextStyle.Subtitle,
+                AtlasTextStyle.CardTitle,
+                AtlasTextStyle.BodyStrong,
+                AtlasTextStyle.Label -> FontWeight.Bold
+
+                AtlasTextStyle.CardSubtitle,
+                AtlasTextStyle.Body,
+                AtlasTextStyle.Caption,
+                AtlasTextStyle.Overline -> FontWeight.Medium
             },
             fontFamily = neonFontFamily
         )
