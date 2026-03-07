@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -180,6 +181,27 @@ open class AtlasComponents {
         notImplemented("Divider")
     }
 
+    @Composable
+    open fun Tooltip(
+        text: String,
+        expanded: Boolean,
+        onDismiss: () -> Unit,
+        modifier: Modifier = Modifier
+    ) {
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = onDismiss,
+            modifier = modifier
+        ) {
+            Card(
+                modifier = Modifier.widthIn(max = 280.dp),
+                contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp)
+            ) {
+                Text(text, AtlasTextStyle.Caption)
+            }
+        }
+    }
+
     /* ──────────────── Dialogs ──────────────── */
 
     @Composable
@@ -205,7 +227,7 @@ open class AtlasComponents {
                     contentPadding = PaddingValues(20.dp)
                 ) {
                     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                        Text(title, AtlasTextStyle.CardTitle)
+                        Text(title, AtlasTextStyle.SectionTitle)
                         Text(text, AtlasTextStyle.Body)
                         Row(
                             modifier = Modifier.fillMaxWidth(),
@@ -264,6 +286,21 @@ open class AtlasComponents {
     private fun notImplemented(componentName: String): Nothing {
         error("$componentName is not implemented by this AtlasComponents instance")
     }
+}
+
+@Composable
+fun AtlasTooltip(
+    text: String,
+    expanded: Boolean,
+    onDismiss: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    LocalAtlasComponents.current.Tooltip(
+        text = text,
+        expanded = expanded,
+        onDismiss = onDismiss,
+        modifier = modifier
+    )
 }
 
 @Composable
